@@ -2,16 +2,19 @@ float x = 50;
 float y = 100;
 float angle1 = 65.0;
 float angle2 = 0.0;
+float angle3 = 65.0;
 float segLength = 150;
 boolean stopped = false;
 
 void setup() {
-  size(800, 800);
+  size(800, 900);
   smooth(); 
   frameRate(30);
   //noStroke();
   //strokeWeight(20.0);
   //stroke(0, 100);
+  //
+  draw();
 }
 
 void draw() {
@@ -29,7 +32,14 @@ void draw() {
     if (angle1 > 360) {
         angle1 = 0;
     }
-    drawGear(width/3, height/3, 315, angle1, #FF0000);
+    drawGear(width/3, height/4, 315, angle1, #FF0000);
+    
+    angle3 += speed;
+    
+    if (angle3 > 360) {
+        angle3 = 0;
+    }
+    drawGear((width/3) + 20, (height / 4) + (315 / 1.53) + 220, 315, angle3, #00FF00);
     
     angle2 -= speed * 1.62;
     
@@ -37,7 +47,7 @@ void draw() {
         angle2 = 0;
     }
   
-    drawGear((width / 3) + (315 / 1.53), (height / 3) + (315 / 1.53), 195, angle2, #0000FF);
+    drawGear((width / 3) + (315 / 1.53), (height / 4) + (315 / 1.53), 195, angle2, #0000FF);
     
     popMatrix();
   
