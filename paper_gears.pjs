@@ -33,11 +33,9 @@ function Gear() {
         var p = new Point(x, y);
         var outerCircle = new Path.Circle(p, d / 2);
         outerCircle.fillColor = c;
-        this.group.addChild(outerCircle);
         
         var innerCircle = new Path.Circle(p, d / 8);
         innerCircle.fillColor = 'white';
-        this.group.addChild(innerCircle);
         
         this.group.addChild(this.drawTeeth((d / 2) - 5, d / 15, c, p));
     }
