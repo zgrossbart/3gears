@@ -50,25 +50,28 @@ function Gear() {
         
         var teeth = new Group();
         
+        var path = new Path();
+        path.add(new Point(-(w / 4), -(h / 2)));  // upper left
+        path.add(new Point((w / 4), -(h / 2)));   // upper right
+        path.add(new Point((w / 2), (h / 2)));    // bottom right
+        path.add(new Point(-(w / 2), (h / 2)));   // bottom left
+        path.closePath();
+        path.fillColor = c;
+        
+        var symbol = new Symbol(path);
+        
         for (var i = 0; i < plots; i++) {
             var t = 2 * Math.PI * i / plots;
             var x = Math.round((d + (w / 2)) * Math.cos(t));
             var y = Math.round((d + (h / 2)) * Math.sin(t));
             
-            var path = new Path();
-            path.add(new Point(x - (w / 4), y - (h / 2)));    // upper left
-            path.add(new Point(x + (w / 4), y - (h / 2)));    // upper right
-            path.add(new Point(x + (w / 2), y + (h / 2)));    // bottom right
-            path.add(new Point(x - (w / 2), y + (h / 2)));    // bottom left
-            path.closePath();
-            path.fillColor = c;
-            
-            path.translate(p);
+            var placed = symbol.place(new Point(p.x + x, p.y + y));
+            //path.translate(p);
             
             // 1 radians = 57.2957795 degrees
-            path.rotate((57.2957795 * angle) + 90);
+            placed.rotate((57.2957795 * angle) + 90);
             
-            teeth.addChild(path);
+            teeth.addChild(placed);
             
             
             angle += increase;
