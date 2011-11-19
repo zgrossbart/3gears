@@ -18,7 +18,7 @@
 
 var width = 800;
 var height = 900;
-var started = true;
+var started = false;
 
 var gears = [];
 
@@ -66,7 +66,7 @@ function Gear() {
             var placed = symbol.place(new Point(p.x + x, p.y + y));
             //path.translate(p);
             
-            // 1 radians = 57.2957795 degrees
+            // 1 radian = 57.2957795 degrees
             placed.rotate((57.2957795 * angle) + 90);
             
             teeth.addChild(placed);
@@ -107,15 +107,13 @@ function init() {
     gears.push(redGear);
     
     var blueGear = new Gear();
-    blueGear.create((width / 3) + (315 / 1.47), (height / 4) + (315 / 1.62), 195,
+    blueGear.create((width / 3) + (315 / 1.48), (height / 4) + (315 / 1.62), 195,
                      '#0000FF', speed * 1.62, false);
     gears.push(blueGear);
     
     var greenGear = new Gear();
-    greenGear.create((width/3) + 40, (height / 4) + (315 / 1.53) + 220, 315, '#00FF00', speed, true);
+    greenGear.create((width/3) + 39, (height / 4) + (315 / 1.53) + 219, 315, '#00FF00', speed, true);
     gears.push(greenGear);
-    
-
 }
 
 
