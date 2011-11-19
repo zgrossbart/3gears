@@ -28,26 +28,17 @@ HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
     float d1 = (g1 * 15) / 2;
     float d2 = (g2 * 15) / 2;
     
-    float t = 2 * Math.PI * angle / 360;
-    x = x + Math.round(d1 * Math.cos(t));
-    y = y + Math.round(d1 * Math.sin(t));
+    int x2 = x + ((d1 + d2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI));
+    int y2 = y + ((d1 + d2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI));
     
-    if (clockwise) {
-        x = Math.round(d2 * Math.cos(t)) + x - ((toothSize + 12) / 2);
-        y = Math.round(d2 * Math.sin(t)) + y + ((toothSize + 12) / 2);
-    } else {
-        x = Math.round(d2 * Math.cos(t)) + x + ((toothSize + 12) / 2);
-        y = Math.round(d2 * Math.sin(t)) + y + ((toothSize + 12) / 2)
-    }
-    
-    Gear gear = new Gear(x, y, speed * (g1 / g2), 0, c, g2, clockwise);
+    Gear gear = new Gear(x2, y2, speed * (g1 / g2), 0, c, g2, clockwise);
     gears.add(gear);
     
     clockwise = !clockwise;
     HashMap map = new HashMap();
     
-    map.put('x', x);
-    map.put('y', y);
+    map.put('x', x2);
+    map.put('y', y2);
     map.put('speed', speed * (g1 / g2));
     map.put('gear', gear);
     
@@ -55,25 +46,31 @@ HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
 }
 
 void setup() {
-    size(800, 900);
+    size(960, 650);
     smooth(); 
     
     int speed = 0.02;
     
-    int x = width / 3.5;
-    int y = height / 5;
+    int x = width / 6;
+    int y = height / 3;
     
     Gear redGear = new Gear(x, y, speed, 0, #FF0000, 15, true);
     gears.add(redGear);
     
-    HashMap map = addGear(x, y, 15, 9, #0000FF, speed, 25);
-    map.get('gear').rot(4);
+    HashMap map = addGear(x, y, 15, 9, #0000FF, speed, 35);
+    map.get('gear').rot(14);
     
-    map = addGear(map.get('x'), map.get('y'), 9, 11, #00FF00, map.get('speed'), 120);
+    map = addGear(map.get('x'), map.get('y'), 9, 11, #00FF00, map.get('speed'), 310);
+    map.get('gear').rot(19);
+    
     map = addGear(map.get('x'), map.get('y'), 11, 25, #F00FF0, map.get('speed'), 45);
-    map.get('gear').rot(10);
-    map = addGear(map.get('x'), map.get('y'), 25, 8, #FFA500, map.get('speed'), 160);
     map.get('gear').rot(8);
+    
+    map = addGear(map.get('x'), map.get('y'), 25, 8, #FFA500, map.get('speed'), 305);
+    map.get('gear').rot(17);
+    
+    map = addGear(map.get('x'), map.get('y'), 8, 6, #00FFFF, map.get('speed'), 225);
+    map.get('gear').rot(12);
     
     frameRate(30);
     //drawX();
