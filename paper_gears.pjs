@@ -18,7 +18,7 @@
 
 var width = 850;
 var height = 850;
-var started = false;
+var started = true;
 
 var gears = [];
 var clockwise = false;
