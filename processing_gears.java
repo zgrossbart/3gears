@@ -1,3 +1,21 @@
+/******************************************************************************* 
+ * 
+ * Copyright 2011 Zack Grossbart 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
+
 boolean stopped = false;
 boolean clockwise = false;
 float angle1 = 0.0;
@@ -55,13 +73,12 @@ void setup() {
     map.get('gear').rot(4);
     
     map = addGear(map.get('x'), map.get('y'), 9, 11, #00FF00, map.get('speed'), 120);
-    
     map = addGear(map.get('x'), map.get('y'), 11, 21, #F00FF0, map.get('speed'), 45);
     map = addGear(map.get('x'), map.get('y'), 21, 9, #FFA500, map.get('speed'), 150);
     map.get('gear').rot(7);
     
     frameRate(30);
-    draw();
+    //draw();
 }
 
 void draw() {
@@ -70,7 +87,6 @@ void draw() {
     }
   
     background(236);
-    
     for (int i = 0; i < gears.size(); i++) {
         gears.get(i).drawGear();
     }

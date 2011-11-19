@@ -18,7 +18,7 @@
 
 var width = 850;
 var height = 850;
-var started = false;
+var started = true;
 
 var gears = [];
 var clockwise = false;
@@ -86,6 +86,12 @@ function Gear() {
         return teeth;
     }
     
+    this.rot = function(/*int*/ rotations) {
+        for (var i = 0; i < rotations; i++) {
+            this.rotate();
+        }
+    }
+    
     this.rotate = function() {
         if (this.clockwise) {
             this.group.rotate(this.speed);
@@ -145,24 +151,16 @@ function init() {
     gears.push(redGear);
     
     g = addGear(p, 15, 9, '#0000FF', speed, 25);
-    for (var i = 0; i < 4; i++) {
-        g.gear.rotate();
-    }
-
+    g.gear.rot(4);
+    
     g = addGear(g.point, 9, 11, '#00FF00', g.speed, 120);
-    for (var i = 0; i < 30; i++) {
-        g.gear.rotate();
-    }
+    g.gear.rot(30);
     
     g = addGear(g.point, 11, 21, '#F00FF0', g.speed, 45);
-    for (var i = 0; i < 28; i++) {
-        g.gear.rotate();
-    }
+    g.gear.rot(28);
                                   
     g = addGear(g.point, 21, 9, 'orange', g.speed, 150);
-    for (var i = 0; i < 7; i++) {
-        g.gear.rotate();
-    }
+    g.gear.rot(7);
 }
 
 /**
