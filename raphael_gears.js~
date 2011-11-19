@@ -1,0 +1,3 @@
+window.onload = function () {
+    var paper = Raphael("canvas", 800, 900);
+};
