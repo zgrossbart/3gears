@@ -5,11 +5,11 @@ float angle2 = 0.0;
 void setup() {
   size(800, 900);
   smooth(); 
-  //frameRate(30);
-  drawX();
+  frameRate(30);
+  draw();
 }
 
-void drawX() {
+void draw() {
     if (stopped) {
         return;
     }
@@ -69,9 +69,7 @@ void drawGear(int x, int y, int d, int angle, color c) {
 }
 
 void drawTeeth(int d, int plots, color c) {
-    console.log('plots: ' + plots);
     float increase = Math.PI * 2 / plots;
-    console.log('increase: ' + increase);
     float angle = 0;
     float x = 0;
     float y = 0;
@@ -89,7 +87,6 @@ void drawTeeth(int d, int plots, color c) {
         
         translate(x, y);
         
-        console.log('angle: ' + angle);
         fill(c);
         rotate( angle - 55 );
         quad(-(w / 4), -(h / 2),    // upper left

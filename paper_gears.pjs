@@ -18,35 +18,37 @@
 
 var width = 800;
 var height = 900;
-var started = false;
+var started = true;
 
-var angle1 = 0.0;
-var angle2 = 0.0;
+var gears = [];
 
 function Gear() {
+    this.angle = 0.0;
     
-    this.create = function(/*int*/ x, /*int*/ y, /*int*/ d, /*int*/ angle, /*color*/ c) {
+    this.create = function(/*int*/ x, /*int*/ y, /*int*/ d, /*color*/ c, /*int*/ speed, /*boolean*/ clockwise) {
+        this.group = new Group();
+        this.speed = speed;
+        this.clockwise = clockwise;
+        
         var p = new Point(x, y);
         var outerCircle = new Path.Circle(p, d / 2);
         outerCircle.fillColor = c;
+        this.group.addChild(outerCircle);
         
         var innerCircle = new Path.Circle(p, d / 8);
         innerCircle.fillColor = 'white';
+        this.group.addChild(innerCircle);
         
-        this.drawTeeth((d / 2) - 5, d / 15, c, p);
+        this.group.addChild(this.drawTeeth((d / 2) - 5, d / 15, c, p));
     }
     
     this.drawTeeth = function(/*int*/ d, /*int*/ plots, /*color*/ c, /*Point*/ p) {
-        console.log('plots: ' + plots);
         var increase = Math.PI * 2 / plots;
-        console.log('increase: ' + increase);
         var angle = 0;
         var w = 35;
         var h = 35;
         
         var teeth = new Group();
-        
-        //var angle = circle.length / 15;
         
         for (var i = 0; i < plots; i++) {
             var t = 2 * Math.PI * i / plots;
@@ -59,11 +61,11 @@ function Gear() {
             path.add(new Point(x + (w / 2), y + (h / 2)));    // bottom right
             path.add(new Point(x - (w / 2), y + (h / 2)));    // bottom left
             path.closePath();
-            path.fillColor = 'green';
+            path.fillColor = c;
             
             path.translate(p);
             
-            console.log('angle: ' + angle);
+            // 1 radians = 57.2957795 degrees
             path.rotate((57.2957795 * angle) + 90);
             
             teeth.addChild(path);
@@ -71,10 +73,16 @@ function Gear() {
             
             angle += increase;
         }
+        
+        return teeth;
     }
     
-    this.draw = function() {
-        
+    this.rotate = function() {
+        if (this.clockwise) {
+            this.group.rotate(this.speed);
+        } else {
+            this.group.rotate(-this.speed);
+        }
     }
 }
 
@@ -91,13 +99,20 @@ function onMouseUp(event) {
  */
 function init() {
     
-    var redGear = new Gear();
-    redGear.create(width/3, height/4, 315, angle1, '#FF0000');
+    var speed = 0.75;
     
+    var redGear = new Gear();
+    redGear.create(width/3, height/4, 315, '#FF0000', speed, true);
+    gears.push(redGear);
+    
+    var blueGear = new Gear();
+    blueGear.create((width / 3) + (315 / 1.47), (height / 4) + (315 / 1.62), 195,
+                     '#0000FF', speed * 1.62, false);
+    gears.push(blueGear);
     
     var greenGear = new Gear();
-    greenGear.create((width / 3) + (315 / 1.47), (height / 4) + (315 / 1.62), 195, angle2, '#0000FF');
-    
+    greenGear.create((width/3) + 40, (height / 4) + (315 / 1.53) + 220, 315, '#00FF00', speed, true);
+    gears.push(greenGear);
     
 
 }
@@ -108,7 +123,9 @@ function init() {
  */
 function onFrame(event) {
     if (started) {
-        
+        for (var i = 0; i < gears.length; i++) {
+            gears[i].rotate();
+        }
     } 
 }
 
