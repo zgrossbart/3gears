@@ -16,8 +16,8 @@
  *
  ******************************************************************************/
 
-var width = 800;
-var height = 900;
+var width = 850;
+var height = 850;
 var started = false;
 
 var gears = [];
@@ -147,9 +147,7 @@ function init() {
     
     var speed = 0.75;
     
-    var p = new Point(width / 3, height / 4);
-    var p1 = new Point(p.x + (315 / 2) + (195 / 2),
-                       p.y + (315 / 2) + (195 / 2));
+    var p = new Point(width / 5, height / 6);
     var redGear = new Gear();
     redGear.create(p.x, p.y, 15, '#FF0000', speed, true);
     gears.push(redGear);
@@ -158,8 +156,19 @@ function init() {
     for (var i = 0; i < 4; i++) {
         g.gear.rotate();
     }
-    g = addGear(g.point, 9, 25, '#00FF00', g.speed, 100);
+
+    g = addGear(g.point, 9, 11, '#00FF00', g.speed, 120);
     for (var i = 0; i < 28; i++) {
+        g.gear.rotate();
+    }
+    
+    g = addGear(g.point, 11, 21, '#F00FF0', g.speed, 45);
+    for (var i = 0; i < 28; i++) {
+        g.gear.rotate();
+    }
+                                  
+    g = addGear(g.point, 21, 9, 'orange', g.speed, 150);
+    for (var i = 0; i < 8; i++) {
         g.gear.rotate();
     }
     
