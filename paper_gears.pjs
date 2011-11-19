@@ -159,7 +159,7 @@ function init() {
     g = addGear(g.point, 11, 21, '#F00FF0', g.speed, 45);
     g.gear.rot(28);
                                   
-    g = addGear(g.point, 21, 9, 'orange', g.speed, 150);
+    g = addGear(g.point, 21, 5, 'orange', g.speed, 150);
     g.gear.rot(7);
 }
 
