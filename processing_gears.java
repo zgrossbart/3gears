@@ -1,13 +1,12 @@
 boolean stopped = false;
-float angle1 = 65.0;
+float angle1 = 0.0;
 float angle2 = 0.0;
-float angle3 = 65.0;
 
 void setup() {
   size(800, 900);
   smooth(); 
   frameRate(30);
-  draw();
+  //drawX();
 }
 
 void draw() {
@@ -31,11 +30,7 @@ void draw() {
     /*
      The big green gear
      */
-    angle3 += speed;
-    if (angle3 > 360) {
-        angle3 = 0;
-    }
-    drawGear((width/3) + 20, (height / 4) + (315 / 1.53) + 220, 315, angle3, #00FF00);
+    drawGear((width/3) + 40, (height / 4) + (315 / 1.53) + 220, 315, angle1, #00FF00);
     
     /*
      The small blue gear
@@ -44,7 +39,7 @@ void draw() {
     if (angle2 > 360) {
         angle2 = 0;
     }
-    drawGear((width / 3) + (315 / 1.53), (height / 4) + (315 / 1.53), 195, angle2, #0000FF);
+    drawGear((width / 3) + (315 / 1.47), (height / 4) + (315 / 1.62), 195, angle2, #0000FF);
   
 }
 
