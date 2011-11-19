@@ -139,7 +139,7 @@ function init() {
     
     var speed = 0.75;
     
-    var p = new Point(width / 5, height / 6);
+    var p = new Point(width / 3.5, height / 5);
     var redGear = new Gear();
     redGear.create(p.x, p.y, 15, '#FF0000', speed, true);
     gears.push(redGear);
