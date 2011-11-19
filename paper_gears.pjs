@@ -1,0 +1,76 @@
+/******************************************************************************* 
+ * 
+ * Copyright 2011 Zack Grossbart 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ ******************************************************************************/
+
+var width = 800;
+var height = 900;
+var started = false;
+
+var angle1 = 0.0;
+var angle2 = 0.0;
+
+function Gear() {
+    
+    this.create = function(/*int*/ x, /*int*/ y, /*int*/ d, /*int*/ angle, /*color*/ c) {
+        var outerCircle = new Path.Circle(new Point(x, y), d / 2);
+        outerCircle.fillColor = c;
+        
+        var innerCircle = new Path.Circle(new Point(x, y), d / 8);
+        innerCircle.fillColor = 'white';
+        
+    }
+    
+    this.draw = function() {
+        
+    }
+}
+
+/**
+ * This function helps us with debugging.  We can stop and start
+ * the animation whenever the user clicks the mouse.
+ */
+function onMouseUp(event) {
+    started = !started;
+}
+
+/**
+ * This function initializes our script.
+ */
+function init() {
+    
+    var redGear = new Gear();
+    redGear.create(width/3, height/4, 315, angle1, '#FF0000');
+    
+    
+    var greenGear = new Gear();
+    greenGear.create((width / 3) + (315 / 1.47), (height / 4) + (315 / 1.62), 195, angle2, '#0000FF');
+    
+    
+
+}
+
+
+/**
+ * This function is called with each frame of the animation.
+ */
+function onFrame(event) {
+    if (started) {
+        
+    } 
+}
+
+init();
