@@ -25,10 +25,12 @@ var gears = [];
 function Gear() {
     this.angle = 0.0;
     
-    this.create = function(/*int*/ x, /*int*/ y, /*int*/ d, /*color*/ c, /*int*/ speed, /*boolean*/ clockwise) {
+    this.create = function(/*int*/ x, /*int*/ y, /*int*/ teeth, /*color*/ c, /*int*/ speed, /*boolean*/ clockwise) {
         this.group = new Group();
         this.speed = speed;
         this.clockwise = clockwise;
+        
+        var d = teeth * 15;
         
         var p = new Point(x, y);
         var outerCircle = new Path.Circle(p, d / 2);
@@ -49,10 +51,20 @@ function Gear() {
         var teeth = new Group();
         
         var path = new Path();
-        path.add(new Point(-(w / 4), -(h / 2)));  // upper left
-        path.add(new Point((w / 4), -(h / 2)));   // upper right
-        path.add(new Point((w / 2), (h / 2)));    // bottom right
+        path.add(new Point(-(w / 4) + 2, -(h / 2)));  // upper left
+        path.add(new Point((w / 4) - 2, -(h / 2)));   // upper right
+        var throughPoint = new Point(new Point((w / 4), -(h / 2) + 4));
+        var toPoint = new Point((w / 2), (h / 2));
+        path.arcTo(throughPoint, toPoint);
+                                                  
+        
+        //path.add(new Point((w / 2), (h / 2)));    // bottom right
         path.add(new Point(-(w / 2), (h / 2)));   // bottom left
+        
+        throughPoint = new Point(new Point(new Point(-(w / 4) , -(h / 2) + 4)));
+        toPoint = new Point(-(w / 4) + 2, -(h / 2));
+        path.arcTo(throughPoint, toPoint);
+        
         path.closePath();
         path.fillColor = c;
         
@@ -95,6 +107,28 @@ function onMouseUp(event) {
     started = !started;
 }
 
+function addGear(/*Point*/ p, /*int*/ g1, /*int*/ g2, /*color*/ color, /*int*/ speed) {
+    var d1 = (g1 * 15) / 2;
+    var d2 = (g2 * 15) / 2;
+    
+    var t = 2 * Math.PI * 45 / 360;
+    var x = Math.round(d1 * Math.cos(t));
+    var y = Math.round(d1 * Math.sin(t));
+    var p2 = new Point(p.x + x, p.y + y);
+    circle = new Path.Circle(p2, 5);
+    circle.fillColor = 'green';
+    
+    t = 2 * Math.PI * 45 / 360;
+    x = Math.round(d2 * Math.cos(t));
+    y = Math.round(d2 * Math.sin(t));
+    var p3 = new Point(p2.x + x + (35 / 1.5) + 10, p2.y + y + (35 / 1.5) - 10);
+    
+    var blueGear = new Gear();
+    blueGear.create(p3.x, p3.y, g2,
+                    color, speed * (g1 / g2), false);
+    gears.push(blueGear);
+}
+
 /**
  * This function initializes our script.
  */
@@ -102,18 +136,51 @@ function init() {
     
     var speed = 0.75;
     
+    var p = new Point(width / 3, height / 4);
+    console.log('p: ' + p);
+    
+    var p1 = new Point(p.x + (315 / 2) + (195 / 2),
+                       p.y + (315 / 2) + (195 / 2));
+    console.log('p1: ' + p1);
+    
     var redGear = new Gear();
-    redGear.create(width/3, height/4, 315, '#FF0000', speed, true);
+    redGear.create(p.x, p.y, 21, '#FF0000', speed, true);
     gears.push(redGear);
     
+    addGear(p, 21, 13, '#0000FF', speed);
+    return;
+    
+    /*var circle = new Path.Circle(p, 5);
+    circle.fillColor = 'purple';
+    
+    circle = new Path.Circle(p1, 5);
+    circle.fillColor = 'purple';*/
+    
+    var t = 2 * Math.PI * 45 / 360;
+    var x = Math.round((315 / 2) * Math.cos(t));
+    var y = Math.round((315 / 2) * Math.sin(t));
+    var p2 = new Point(p.x + x, p.y + y);
+    /*circle = new Path.Circle(p2, 5);
+    circle.fillColor = 'green';*/
+    
+    t = 2 * Math.PI * 45 / 360;
+    x = Math.round((195 / 2) * Math.cos(t));
+    y = Math.round((195 / 2) * Math.sin(t));
+    var p3 = new Point(p2.x + x + (35 / 1.5) + 10, p2.y + y + (35 / 1.5) - 10);
+    
     var blueGear = new Gear();
-    blueGear.create((width / 3) + (315 / 1.48), (height / 4) + (315 / 1.62), 195,
-                     '#0000FF', speed * 1.62, false);
+    blueGear.create(p3.x, p3.y, 13,
+                    '#0000FF', speed * 1.62, false);
     gears.push(blueGear);
     
-    var greenGear = new Gear();
+    /*var greenGear = new Gear();
     greenGear.create((width/3) + 39, (height / 4) + (315 / 1.53) + 219, 315, '#00FF00', speed, true);
-    gears.push(greenGear);
+    gears.push(greenGear);*/
+    
+    circle = new Path.Circle(p3, 5);
+    circle.fillColor = 'cyan';
+    
+    
 }
 
 
