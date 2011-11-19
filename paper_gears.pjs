@@ -18,7 +18,7 @@
 
 var width = 850;
 var height = 850;
-var started = true;
+var started = false;
 
 var gears = [];
 var clockwise = false;
@@ -156,11 +156,11 @@ function init() {
     g = addGear(g.point, 9, 11, '#00FF00', g.speed, 120);
     g.gear.rot(30);
     
-    g = addGear(g.point, 11, 21, '#F00FF0', g.speed, 45);
-    g.gear.rot(28);
+    g = addGear(g.point, 11, 25, '#F00FF0', g.speed, 45);
+    g.gear.rot(14);
                                   
-    g = addGear(g.point, 21, 5, 'orange', g.speed, 150);
-    g.gear.rot(7);
+    g = addGear(g.point, 25, 8, 'orange', g.speed, 165);
+    g.gear.rot(24);
 }
 
 /**

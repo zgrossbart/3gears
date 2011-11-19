@@ -70,9 +70,10 @@ void setup() {
     map.get('gear').rot(4);
     
     map = addGear(map.get('x'), map.get('y'), 9, 11, #00FF00, map.get('speed'), 120);
-    map = addGear(map.get('x'), map.get('y'), 11, 21, #F00FF0, map.get('speed'), 45);
-    map = addGear(map.get('x'), map.get('y'), 21, 5, #FFA500, map.get('speed'), 150);
-    map.get('gear').rot(14);
+    map = addGear(map.get('x'), map.get('y'), 11, 25, #F00FF0, map.get('speed'), 45);
+    map.get('gear').rot(10);
+    map = addGear(map.get('x'), map.get('y'), 25, 8, #FFA500, map.get('speed'), 160);
+    map.get('gear').rot(8);
     
     frameRate(30);
     //drawX();
