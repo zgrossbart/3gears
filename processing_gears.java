@@ -33,9 +33,6 @@ HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
     y = y + Math.round(d1 * Math.sin(t));
     
     if (clockwise) {
-        //x = Math.round(d2 * Math.cos(t)) + x - ((toothSize + 12) / 2);
-        //y = Math.round(d2 * Math.sin(t)) + y - ((toothSize + 12) / 2)
-        
         x = Math.round(d2 * Math.cos(t)) + x - ((toothSize + 12) / 2);
         y = Math.round(d2 * Math.sin(t)) + y + ((toothSize + 12) / 2);
     } else {
