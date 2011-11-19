@@ -160,7 +160,7 @@ function init() {
     }
                                   
     g = addGear(g.point, 21, 9, 'orange', g.speed, 150);
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 7; i++) {
         g.gear.rotate();
     }
 }
