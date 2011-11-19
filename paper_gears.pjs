@@ -26,12 +26,51 @@ var angle2 = 0.0;
 function Gear() {
     
     this.create = function(/*int*/ x, /*int*/ y, /*int*/ d, /*int*/ angle, /*color*/ c) {
-        var outerCircle = new Path.Circle(new Point(x, y), d / 2);
+        var p = new Point(x, y);
+        var outerCircle = new Path.Circle(p, d / 2);
         outerCircle.fillColor = c;
         
-        var innerCircle = new Path.Circle(new Point(x, y), d / 8);
+        var innerCircle = new Path.Circle(p, d / 8);
         innerCircle.fillColor = 'white';
         
+        this.drawTeeth((d / 2) - 5, d / 15, c, p);
+    }
+    
+    this.drawTeeth = function(/*int*/ d, /*int*/ plots, /*color*/ c, /*Point*/ p) {
+        console.log('plots: ' + plots);
+        var increase = Math.PI * 2 / plots;
+        console.log('increase: ' + increase);
+        var angle = 0;
+        var w = 35;
+        var h = 35;
+        
+        var teeth = new Group();
+        
+        //var angle = circle.length / 15;
+        
+        for (var i = 0; i < plots; i++) {
+            var t = 2 * Math.PI * i / plots;
+            var x = Math.round((d + (w / 2)) * Math.cos(t));
+            var y = Math.round((d + (h / 2)) * Math.sin(t));
+            
+            var path = new Path();
+            path.add(new Point(x - (w / 4), y - (h / 2)));    // upper left
+            path.add(new Point(x + (w / 4), y - (h / 2)));    // upper right
+            path.add(new Point(x + (w / 2), y + (h / 2)));    // bottom right
+            path.add(new Point(x - (w / 2), y + (h / 2)));    // bottom left
+            path.closePath();
+            path.fillColor = 'green';
+            
+            path.translate(p);
+            
+            console.log('angle: ' + angle);
+            path.rotate((57.2957795 * angle) + 90);
+            
+            teeth.addChild(path);
+            
+            
+            angle += increase;
+        }
     }
     
     this.draw = function() {
