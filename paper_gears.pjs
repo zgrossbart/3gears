@@ -110,11 +110,11 @@ function onMouseUp(event) {
 }
 
 function addGear(/*Point*/ p, /*int*/ g1, /*int*/ g2, /*color*/ color, /*int*/ speed, /*int*/ angle) {
-    var d1 = (g1 * 15) / 2;
-    var d2 = (g2 * 15) / 2;
+    var r1 = (g1 * 15) / 2;
+    var r2 = (g2 * 15) / 2;
     
-    var p2 = new Point(p.x + ((d1 + d2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI)),
-                       p.y + ((d1 + d2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI)));
+    var p2 = new Point(p.x + ((r1 + r2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI)),
+                       p.y + ((r1 + r2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI)));
     
     var gear = new Gear();
     gear.create(p2.x, p2.y, g2, color, speed * (g1 / g2), clockwise);

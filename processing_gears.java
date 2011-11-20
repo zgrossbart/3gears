@@ -25,11 +25,11 @@ ArrayList gears = new ArrayList();
 int toothSize = 30;
 
 HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
-    float d1 = (g1 * 15) / 2;
-    float d2 = (g2 * 15) / 2;
+    float r1 = (g1 * 15) / 2;
+    float r2 = (g2 * 15) / 2;
     
-    int x2 = x + ((d1 + d2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI));
-    int y2 = y + ((d1 + d2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI));
+    int x2 = x + ((r1 + r2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI));
+    int y2 = y + ((r1 + r2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI));
     
     Gear gear = new Gear(x2, y2, speed * (g1 / g2), 0, c, g2, clockwise);
     gears.add(gear);
