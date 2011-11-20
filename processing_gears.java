@@ -24,6 +24,54 @@ float angle2 = 0.0;
 ArrayList gears = new ArrayList();
 int toothSize = 30;
 
+void setup() {
+    size(960, 650);
+    smooth(); 
+    
+    int speed = 0.02;
+    
+    int x = width / 6;
+    int y = height / 3;
+    
+    Gear redGear = new Gear(x, y, speed, 0, #ee2a33, 15, true);                         // red gear
+    gears.add(redGear);
+    
+    HashMap map = addGear(x, y, 15, 9, #00aeef, speed, 35);                             // blue gear
+    map.get('gear').rot(14);
+    
+    map = addGear(map.get('x'), map.get('y'), 9, 11, #d7df21, map.get('speed'), 110);   // green yellow gear
+    map.get('gear').rot(16);
+    
+    map = addGear(map.get('x'), map.get('y'), 11, 6, #1ab374, map.get('speed'), 25);   // green gear
+    map.get('gear').rot(2);
+    
+    map = addGear(map.get('x'), map.get('y'), 6, 25, #F00FF0, map.get('speed'), 330);   // light purple gear
+    map.get('gear').rot(11);
+    
+    map = addGear(map.get('x'), map.get('y'), 25, 8, #fec01e, map.get('speed'), 305);   // yellow gear
+    map.get('gear').rot(2);
+    
+    map = addGear(map.get('x'), map.get('y'), 8, 6, #e0cb61, map.get('speed'), 225);   // beige gear
+    map.get('gear').rot(7);
+    
+    map = addGear(map.get('x'), map.get('y'), 6, 10, #f69c9f, map.get('speed'), 185);   // pink gear
+    map.get('gear').rot(13);
+    
+    frameRate(30);
+    //drawX();
+}
+
+void draw() {
+    if (stopped) {
+        return;
+    }
+  
+    background(236);
+    for (int i = 0; i < gears.size(); i++) {
+        gears.get(i).drawGear();
+    }
+}
+
 HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
     float r1 = (g1 * 15) / 2;
     float r2 = (g2 * 15) / 2;
@@ -43,48 +91,6 @@ HashMap addGear(int x, int y, int g1, int g2, color c, int speed, int angle) {
     map.put('gear', gear);
     
     return map;
-}
-
-void setup() {
-    size(960, 650);
-    smooth(); 
-    
-    int speed = 0.02;
-    
-    int x = width / 6;
-    int y = height / 3;
-    
-    Gear redGear = new Gear(x, y, speed, 0, #FF0000, 15, true);
-    gears.add(redGear);
-    
-    HashMap map = addGear(x, y, 15, 9, #0000FF, speed, 35);
-    map.get('gear').rot(14);
-    
-    map = addGear(map.get('x'), map.get('y'), 9, 11, #00FF00, map.get('speed'), 310);
-    map.get('gear').rot(19);
-    
-    map = addGear(map.get('x'), map.get('y'), 11, 25, #F00FF0, map.get('speed'), 45);
-    map.get('gear').rot(8);
-    
-    map = addGear(map.get('x'), map.get('y'), 25, 8, #FFA500, map.get('speed'), 305);
-    map.get('gear').rot(17);
-    
-    map = addGear(map.get('x'), map.get('y'), 8, 6, #FF7F50, map.get('speed'), 225);
-    map.get('gear').rot(12);
-    
-    frameRate(30);
-    //drawX();
-}
-
-void draw() {
-    if (stopped) {
-        return;
-    }
-  
-    background(236);
-    for (int i = 0; i < gears.size(); i++) {
-        gears.get(i).drawGear();
-    }
 }
 
 class Gear {
