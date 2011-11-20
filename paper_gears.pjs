@@ -39,10 +39,10 @@ function init() {
     g = addGear(p, 15, 9, '#00aeef', speed, 35);            // blue gear
     g.gear.rot(21);
     
-    g = addGear(g.point, 9, 11, '#d7df21', g.speed, 110);   // green yellow gear
+    g = addGear(g.point, 9, 11, '#52b755', g.speed, 110);   // green gear
     g.gear.rot(25);
     
-    g = addGear(g.point, 11, 6, '#1ab374', g.speed, 25);   // green gear
+    g = addGear(g.point, 11, 6, '#d03c3a', g.speed, 25);    // dark red gear
     g.gear.rot(34);
     
     g = addGear(g.point, 6, 25, '#F00FF0', g.speed, 330);   // light purple gear
@@ -54,7 +54,7 @@ function init() {
     g = addGear(g.point, 8, 6, '#e0cb61', g.speed, 225);    // beige gear
     g.gear.rot(8);
     
-    g = addGear(g.point, 6, 10, '#f69c9f', g.speed, 185);    // pink gear
+    g = addGear(g.point, 6, 10, '#f69c9f', g.speed, 185);   // pink gear
     g.gear.rot(17);
 }
 

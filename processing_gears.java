@@ -39,16 +39,16 @@ void setup() {
     HashMap map = addGear(x, y, 15, 9, #00aeef, speed, 35);                             // blue gear
     map.get('gear').rot(14);
     
-    map = addGear(map.get('x'), map.get('y'), 9, 11, #d7df21, map.get('speed'), 110);   // green yellow gear
+    map = addGear(map.get('x'), map.get('y'), 9, 11, #52b755, map.get('speed'), 110);   // green gear
     map.get('gear').rot(16);
     
-    map = addGear(map.get('x'), map.get('y'), 11, 6, #1ab374, map.get('speed'), 25);    // green gear
+    map = addGear(map.get('x'), map.get('y'), 11, 6, #d03c3a, map.get('speed'), 25);    // dark red gear
     map.get('gear').rot(2);
     
     map = addGear(map.get('x'), map.get('y'), 6, 25, #F00FF0, map.get('speed'), 330);   // light purple gear
     map.get('gear').rot(11);
     
-    map = addGear(map.get('x'), map.get('y'), 25, 8, #fec01e, map.get('speed'), 305);   // yellow gear
+    map = addGear(map.get('x'), map.get('y'), 25, 8, #f8b724, map.get('speed'), 305);   // yellow gear
     map.get('gear').rot(2);
     
     map = addGear(map.get('x'), map.get('y'), 8, 6, #e0cb61, map.get('speed'), 225);    // beige gear
