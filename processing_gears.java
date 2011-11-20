@@ -31,7 +31,7 @@ void setup() {
     int speed = 0.02;
     
     int x = width / 6;
-    int y = height / 3;
+    int y = (height / 3) - 15;
     
     Gear redGear = new Gear(x, y, speed, 0, #ee2a33, 15, true);                         // red gear
     gears.add(redGear);
@@ -42,7 +42,7 @@ void setup() {
     map = addGear(map.get('x'), map.get('y'), 9, 11, #d7df21, map.get('speed'), 110);   // green yellow gear
     map.get('gear').rot(16);
     
-    map = addGear(map.get('x'), map.get('y'), 11, 6, #1ab374, map.get('speed'), 25);   // green gear
+    map = addGear(map.get('x'), map.get('y'), 11, 6, #1ab374, map.get('speed'), 25);    // green gear
     map.get('gear').rot(2);
     
     map = addGear(map.get('x'), map.get('y'), 6, 25, #F00FF0, map.get('speed'), 330);   // light purple gear
@@ -51,14 +51,14 @@ void setup() {
     map = addGear(map.get('x'), map.get('y'), 25, 8, #fec01e, map.get('speed'), 305);   // yellow gear
     map.get('gear').rot(2);
     
-    map = addGear(map.get('x'), map.get('y'), 8, 6, #e0cb61, map.get('speed'), 225);   // beige gear
+    map = addGear(map.get('x'), map.get('y'), 8, 6, #e0cb61, map.get('speed'), 225);    // beige gear
     map.get('gear').rot(7);
     
-    map = addGear(map.get('x'), map.get('y'), 6, 10, #f69c9f, map.get('speed'), 185);   // pink gear
-    map.get('gear').rot(13);
+    map = addGear(map.get('x'), map.get('y'), 6, 10, #f69c9f, map.get('speed'), 180);   // pink gear
+    map.get('gear').rot(18);
     
     frameRate(30);
-    //drawX();
+    //draw();
 }
 
 void draw() {
@@ -141,9 +141,11 @@ class Gear {
         
     }
     
-    void rot(int rotations) {
-        for (int i = 0; i < rotations; i++) {
-            rot();
+    void rot(int angle) {
+        if (m_clockwise) {
+            m_angle += angle * m_speed;
+        } else {
+            m_angle -= angle * m_speed;
         }
     }
     
