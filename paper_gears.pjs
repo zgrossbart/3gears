@@ -16,12 +16,13 @@
  *
  ******************************************************************************/
 
-var width = 800;
-var height = 900;
-var started = false;
+var width = 960;
+var height = 650;
+var started = true;
 
 var gears = [];
 var clockwise = false;
+var toothSize = 28;
 
 function Gear() {
     this.angle = 0.0;
@@ -46,26 +47,24 @@ function Gear() {
     this.drawTeeth = function(/*int*/ d, /*int*/ plots, /*color*/ c, /*Point*/ p) {
         var increase = Math.PI * 2 / plots;
         var angle = 0;
-        var w = 30;
-        var h = 30;
         
         var teeth = new Group();
         
         var path = new Path();
-        path.add(new Point(-(w / 4) + 2, -(h / 2)));  // upper left
-        path.add(new Point((w / 4) - 2, -(h / 2)));   // upper right
-        var throughPoint = new Point(new Point((w / 4), -(h / 2) + 4));
-        var toPoint = new Point((w / 2), (h / 2));
-        path.arcTo(throughPoint, toPoint);
-                                                  
+        path.add(new Point(-(toothSize / 4) + 2, -(toothSize / 2)));  // upper left
+        path.add(new Point((toothSize / 4) - 2, -(toothSize / 2)));   // upper right
         
-        //path.add(new Point((w / 2), (h / 2)));    // bottom right
-        path.add(new Point(-(w / 2), (h / 2)));   // bottom left
-        
-        throughPoint = new Point(new Point(new Point(-(w / 4) , -(h / 2) + 4)));
-        toPoint = new Point(-(w / 4) + 2, -(h / 2));
+        // Curve down to the bottom right point
+        var throughPoint = new Point(new Point((toothSize / 4), -(toothSize / 2) + 4));
+        var toPoint = new Point((toothSize / 2), (toothSize / 2));
         path.arcTo(throughPoint, toPoint);
         
+        path.add(new Point(-(toothSize / 2), (toothSize / 2)));   // bottom left
+        
+        // Curve up to the top left point
+        throughPoint = new Point(new Point(new Point(-(toothSize / 4) , -(toothSize / 2) + 4)));
+        toPoint = new Point(-(toothSize / 4) + 2, -(toothSize / 2));
+        path.arcTo(throughPoint, toPoint);
         path.closePath();
         path.fillColor = c;
         
@@ -73,22 +72,24 @@ function Gear() {
         
         for (var i = 0; i < plots; i++) {
             var t = 2 * Math.PI * i / plots;
-            var x = Math.round((d + (w / 2)) * Math.cos(t));
-            var y = Math.round((d + (h / 2)) * Math.sin(t));
+            var x = Math.round((d + (toothSize / 2)) * Math.cos(t));
+            var y = Math.round((d + (toothSize / 2)) * Math.sin(t));
             
             var placed = symbol.place(new Point(p.x + x, p.y + y));
-            //path.translate(p);
-            
+
             // 1 radian = 57.2957795 degrees
-            placed.rotate((57.2957795 * angle) + 90);
-            
+            placed.rotate(((180 / Math.PI) * angle) + 90);
             teeth.addChild(placed);
-            
-            
             angle += increase;
         }
         
         return teeth;
+    }
+    
+    this.rot = function(/*int*/ rotations) {
+        for (var i = 0; i < rotations; i++) {
+            this.rotate();
+        }
     }
     
     this.rotate = function() {
@@ -112,29 +113,16 @@ function addGear(/*Point*/ p, /*int*/ g1, /*int*/ g2, /*color*/ color, /*int*/ s
     var d1 = (g1 * 15) / 2;
     var d2 = (g2 * 15) / 2;
     
-    var t = 2 * Math.PI * angle / 360;
-    var x = Math.round(d1 * Math.cos(t));
-    var y = Math.round(d1 * Math.sin(t));
-    var p2 = new Point(p.x + x, p.y + y);
-    
-    x = Math.round(d2 * Math.cos(t));
-    y = Math.round(d2 * Math.sin(t));
-    var p3 = new Point(p2.x + x + ((30 + 10) / 2), p2.y + y + ((30 + 10) / 2));
-    
-    if (clockwise) {
-        p3 = new Point(p2.x + x - ((30 + 10) / 2), p2.y + y + ((30 + 10) / 2));
-    }
+    var p2 = new Point(p.x + ((d1 + d2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI)),
+                       p.y + ((d1 + d2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI)));
     
     var gear = new Gear();
-    
-    gear.create(p3.x, p3.y, g2,
-                    color, speed * (g1 / g2), clockwise);
+    gear.create(p2.x, p2.y, g2, color, speed * (g1 / g2), clockwise);
     gears.push(gear);
     
     clockwise = !clockwise;
-    
     return {
-        'point': p3,
+        'point': p2,
         'speed': speed * (g1 / g2),
         'gear': gear
     };
@@ -147,24 +135,26 @@ function init() {
     
     var speed = 0.75;
     
-    var p = new Point(width / 3, height / 4);
-    var p1 = new Point(p.x + (315 / 2) + (195 / 2),
-                       p.y + (315 / 2) + (195 / 2));
+    var p = new Point(width / 6, height / 3);
     var redGear = new Gear();
     redGear.create(p.x, p.y, 15, '#FF0000', speed, true);
     gears.push(redGear);
     
-    g = addGear(p, 15, 9, '#0000FF', speed, 25);
-    for (var i = 0; i < 4; i++) {
-        g.gear.rotate();
-    }
-    g = addGear(g.point, 9, 25, '#00FF00', g.speed, 100);
-    for (var i = 0; i < 28; i++) {
-        g.gear.rotate();
-    }
+    g = addGear(p, 15, 9, '#0000FF', speed, 35);
+    g.gear.rot(21);
     
+    g = addGear(g.point, 9, 11, '#00FF00', g.speed, 310);
+    g.gear.rot(28);
+    
+    g = addGear(g.point, 11, 25, '#F00FF0', g.speed, 45);
+    g.gear.rot(11);
+    
+    g = addGear(g.point, 25, 8, 'orange', g.speed, 305);
+    g.gear.rot(26);
+    
+    g = addGear(g.point, 8, 6, '#FF7F50', g.speed, 225);
+    g.gear.rot(17);
 }
-
 
 /**
  * This function is called with each frame of the animation.
