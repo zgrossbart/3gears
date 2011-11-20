@@ -15,6 +15,8 @@
  * limitations under the License.
  *
  ******************************************************************************/
+ 
+var speed = 0.75;
 
 var width = 960;
 var height = 650;
@@ -24,17 +26,42 @@ var gears = [];
 var clockwise = false;
 var toothSize = 28;
 
+/**
+ * This function initializes our script.
+ */
+function init() {
+    
+    var p = new Point(width / 6, height / 3);
+    var redGear = new Gear();
+    redGear.create(p, 15, '#ee2a33', speed, true);          // red gear
+    gears.push(redGear);
+    
+    g = addGear(p, 15, 9, '#00aeef', speed, 35);            // blue gear
+    g.gear.rot(21);
+    
+    g = addGear(g.point, 9, 11, '#1ab374', g.speed, 310);   // green gear
+    g.gear.rot(28);
+    
+    g = addGear(g.point, 11, 25, '#F00FF0', g.speed, 45);   // light purple gear
+    g.gear.rot(11);
+    
+    g = addGear(g.point, 25, 8, '#fec01e', g.speed, 305);   // yellow gear
+    g.gear.rot(26);
+    
+    g = addGear(g.point, 8, 6, '#f69c9f', g.speed, 225);    // pink gear
+    g.gear.rot(17);
+}
+
 function Gear() {
     this.angle = 0.0;
     
-    this.create = function(/*int*/ x, /*int*/ y, /*int*/ teeth, /*color*/ c, /*int*/ speed, /*boolean*/ clockwise) {
+    this.create = function(/*Point*/ p, /*int*/ teeth, /*color*/ c, /*int*/ speed, /*boolean*/ clockwise) {
         this.group = new Group();
         this.speed = speed;
         this.clockwise = clockwise;
         
         var d = teeth * 15;
         
-        var p = new Point(x, y);
         var outerCircle = new Path.Circle(p, d / 2);
         outerCircle.fillColor = c;
         
@@ -117,7 +144,7 @@ function addGear(/*Point*/ p, /*int*/ g1, /*int*/ g2, /*color*/ color, /*int*/ s
                        p.y + ((r1 + r2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI)));
     
     var gear = new Gear();
-    gear.create(p2.x, p2.y, g2, color, speed * (g1 / g2), clockwise);
+    gear.create(p2, g2, color, speed * (g1 / g2), clockwise);
     gears.push(gear);
     
     clockwise = !clockwise;
@@ -126,34 +153,6 @@ function addGear(/*Point*/ p, /*int*/ g1, /*int*/ g2, /*color*/ color, /*int*/ s
         'speed': speed * (g1 / g2),
         'gear': gear
     };
-}
-
-/**
- * This function initializes our script.
- */
-function init() {
-    
-    var speed = 0.75;
-    
-    var p = new Point(width / 6, height / 3);
-    var redGear = new Gear();
-    redGear.create(p.x, p.y, 15, '#FF0000', speed, true);
-    gears.push(redGear);
-    
-    g = addGear(p, 15, 9, '#0000FF', speed, 35);
-    g.gear.rot(21);
-    
-    g = addGear(g.point, 9, 11, '#00FF00', g.speed, 310);
-    g.gear.rot(28);
-    
-    g = addGear(g.point, 11, 25, '#F00FF0', g.speed, 45);
-    g.gear.rot(11);
-    
-    g = addGear(g.point, 25, 8, 'orange', g.speed, 305);
-    g.gear.rot(26);
-    
-    g = addGear(g.point, 8, 6, '#FF7F50', g.speed, 225);
-    g.gear.rot(17);
 }
 
 /**
