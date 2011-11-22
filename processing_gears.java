@@ -57,11 +57,11 @@ void setup() {
     map = addGear(map.get('x'), map.get('y'), 6, 10, #f69c9f, map.get('speed'), 180);   // pink gear
     map.get('gear').rot(18);
     
-    //frameRate(30);
-    drawX();
+    frameRate(30);
+    //drawX();
 }
 
-void drawX() {
+void draw() {
     if (stopped) {
         return;
     }
@@ -177,12 +177,12 @@ class Gear {
             rotate(angle - 55);
             
             beginShape();
-            vertex(-(toothSize / 4) + 2, -(toothSize / 2));    // upper left
-            vertex((toothSize / 4) - 4, -(toothSize / 2));       // upper right
-            vertex(toothSize / 4, -(toothSize / 2) + 6);       // upper right
-            vertex(toothSize / 2, toothSize / 2);          // bottom right
-            vertex(-(toothSize / 2), toothSize / 2);      // bottom left
-            vertex(-(toothSize / 2) + 4, -(toothSize / 2) + 8);      // bottom left
+            vertex(-(toothSize / 4) + 2, -(toothSize / 2));     // upper left
+            vertex((toothSize / 4) - 6, -(toothSize / 2));      // upper right
+            vertex(toothSize / 4, -(toothSize / 2) + 8);        // upper right bump
+            vertex(toothSize / 2, toothSize / 2);               // bottom right
+            vertex(-(toothSize / 2), toothSize / 2);            // bottom left
+            vertex(-(toothSize / 2) + 4, -(toothSize / 2) + 8); // upper left bump
             endShape();
             angle += increase;
             
