@@ -34,16 +34,16 @@ function init() {
     var p = new Point(width / 6, height / 3);
     //var p = new Point(width / 2, height / 2);
     var redGear = new Gear();
-    redGear.create(p, 15, '#ee2a33', speed, true);          // red gear
-    //redGear.rot(55);
+    redGear.create(p, 18, '#ee2a33', speed, true);          // red gear
+    //redGear.rot(175);
+    //console.log('rotating by 65...');
     gears.push(redGear);
     
-    g = addGear(p, redGear, 9, '#00aeef', speed, 60);            // blue gear
-    return;
-    
+    g = addGear(p, redGear, 11, '#00aeef', speed, 35);            // blue gear
+//    return;
     //g.gear.rot(21);
     
-    g = addGear(g.point, g.gear, 11, '#52b755', g.speed, 60);   // green gear
+    g = addGear(g.point, g.gear, 11, '#52b755', g.speed, 10);   // green gear
     return;
     g.gear.rot(25);
     
@@ -115,7 +115,10 @@ function Gear() {
             var y = Math.round((d + (toothSize / 2)) * Math.sin(t));
             
             var placed = symbol.place(new Point(p.x + x, p.y + y));
-
+            
+            //var text = new PointText(new Point(p.x + x, p.y + y));
+            //text.content = '' + i;
+            
             // 1 radian = 57.2957795 degrees
             placed.rotate(((180 / Math.PI) * angle) + 90);
             teeth.addChild(placed);
@@ -147,10 +150,10 @@ function Gear() {
     this.rotate = function() {
         if (this.clockwise) {
             this.group.rotate(this.speed);
-            this.angle += this.speed;
+            //this.angle += this.speed;
         } else {
             this.group.rotate(-this.speed);
-            this.angle -= this.speed;
+            //this.angle -= this.speed;
         }
     }
 }
@@ -181,19 +184,30 @@ function addGear(/*Point*/ p, /*Gear*/ g1, /*int*/ g2, /*color*/ color, /*int*/ 
      */
     var w1 = 360 / g1.getTeethCount();
     console.log('g1.getRot(): ' + g1.getRot());
-    //angle -= g1.getRot();
+    /*angle -= g1.getRot();
     if (angle < 0) {
-        angle += w1;
-    }
+        angle += 360;
+    }*/
+    
     
     console.log('angle: ' + angle);
     
     console.log('w1: ' + w1);
     
-    var tooth = Math.floor(angle / w1);
+    var tooth = Math.floor((angle - g1.getRot()) / w1);
     var t = 2 * Math.PI * tooth / g1.getTeethCount();
-    var x = Math.round((r1 + (toothSize / 2)) * Math.cos(t));
-    var y = Math.round((r1 + (toothSize / 2)) * Math.sin(t));
+    console.log('t: ' + t);
+    var x = Math.round((r1 + (toothSize / 1.5)) * Math.cos(t));
+    var y = Math.round((r1 + (toothSize / 1.5)) * Math.sin(t));
+    console.log('x,y: ' + x + ', ' + y);
+    
+    var r = g1.getRot() * (Math.PI / 180);
+    var x1 = (Math.cos(r) * x) - (Math.sin(r) * y);
+    var y1 = (Math.cos(r) * y) + (Math.sin(r) * x);
+    console.log('x1,y1: ' + x1 + ', ' + y1);
+    
+    x = x1;
+    y = y1;
     
     var pa1 = new Point(g1.getPoint().x + x, g1.getPoint().y + y);
     debugPoint(pa1, 'purple');
