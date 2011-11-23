@@ -41,6 +41,7 @@ function init() {
     g = addGear(p, redGear, 6, '#00aeef', speed, 35);            // blue gear
     g = addGear(g.point, g.gear, 11, '#52b755', g.speed, 110);   // green gear
     g = addGear(g.point, g.gear, 6, '#d03c3a', g.speed, 25);     // dark red gear
+    return;
     g = addGear(g.point, g.gear, 25, '#F00FF0', g.speed, 330);   // light purple gear
     g = addGear(g.point, g.gear, 8, '#fec01e', g.speed, 305);    // yellow gear
     g = addGear(g.point, g.gear, 6, '#e0cb61', g.speed, 225);    // beige gear
@@ -132,7 +133,7 @@ function Gear() {
         return this.angle;
     }
     
-    this.rotate = function() {
+    this.spin = function() {
         if (this.clockwise) {
             this.group.rotate(this.speed);
         } else {
@@ -184,8 +185,11 @@ function addGear(/*Point*/ p, /*Gear*/ gear1, /*int*/ g2, /*color*/ color, /*int
     
     var pa2 = gear2.getPoint();
     var v = pa1 - pa2;
+    console.log('v: ' + v);
     var v2 = pad - pa2;
+    console.log('v2: ' + v2);
     
+    console.log('gear2.rot(' + (v.angle - v2.angle) + ');');
     gear2.rot(v.angle - v2.angle);
     
     clockwise = !clockwise;
@@ -202,7 +206,7 @@ function addGear(/*Point*/ p, /*Gear*/ gear1, /*int*/ g2, /*color*/ color, /*int
 function onFrame(event) {
     if (started) {
         for (var i = 0; i < gears.length; i++) {
-            gears[i].rotate();
+            gears[i].spin();
         }
     } 
 }
