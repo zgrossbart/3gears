@@ -19,13 +19,13 @@
 var speed = 0.75;
 var scale = 15;
 var toothSize = 28;
+var clockwise = false;
 
 var width = 960;
 var height = 650;
 var started = false;
 
 var gears = [];
-var clockwise = false;
 
 
 /**
@@ -119,7 +119,7 @@ function Gear() {
         return this.pos;
     }
     
-    this.getTeethCount = function() {
+    this.getToothCount = function() {
         return this.teethCount;
     }
     
@@ -149,50 +149,50 @@ function onMouseUp(event) {
     started = !started;
 }
 
-function addGear(/*Point*/ p, /*Gear*/ g1, /*int*/ g2, /*color*/ color, /*int*/ speed, /*int*/ angle) {
-    var r1 = (g1.getTeethCount() * scale) / 2;
+function addGear(/*Point*/ p, /*Gear*/ gear1, /*int*/ g2, /*color*/ color, /*int*/ speed, /*int*/ angle) {
+    var r1 = (gear1.getToothCount() * scale) / 2;
     var r2 = (g2 * scale) / 2;
     
     var p2 = new Point(p.x + ((r1 + r2 + (toothSize - 2)) * Math.cos((angle / 180) * Math.PI)),
                        p.y + ((r1 + r2 + (toothSize - 2)) * Math.sin((angle / 180) * Math.PI)));
     
-    var gear = new Gear();
-    gear.create(p2, g2, color, speed * (g1.getTeethCount() / g2), clockwise);
-    gears.push(gear);
+    var gear2 = new Gear();
+    gear2.create(p2, g2, color, speed * (gear1.getToothCount() / g2), clockwise);
+    gears.push(gear2);
     
     /*
      * Now we need to rotate the gears so they match up
      */
-    var w1 = 360 / g1.getTeethCount();
-    var tooth = Math.floor((angle - g1.getRot()) / w1);
-    var t = 2 * Math.PI * tooth / g1.getTeethCount();
+    var wedge = 360 / gear1.getToothCount();
+    var tooth = Math.floor((angle - gear1.getRot()) / wedge);
+    var t = 2 * Math.PI * tooth / gear1.getToothCount();
     var x = Math.round((r1 + (toothSize / 1.85)) * Math.cos(t));
     var y = Math.round((r1 + (toothSize / 1.85)) * Math.sin(t));
     
-    var rad = g1.getRot() * (Math.PI / 180);
+    var rad = gear1.getRot() * (Math.PI / 180);
     var x1 = (Math.cos(rad) * x) - (Math.sin(rad) * y);
     var y1 = (Math.cos(rad) * y) + (Math.sin(rad) * x);
     x = x1;
     y = y1;
     
-    var pa1 = new Point(g1.getPoint().x + x, g1.getPoint().y + y);
+    var pa1 = new Point(gear1.getPoint().x + x, gear1.getPoint().y + y);
 
-    t = 2 * Math.PI * 0.5 / gear.getTeethCount();
+    t = 2 * Math.PI * 0.5 / gear2.getToothCount();
     x = Math.round((r2) * Math.cos(t));
     y = Math.round((r2) * Math.sin(t));
-    var pad = new Point(gear.getPoint().x + x, gear.getPoint().y + y);
+    var pad = new Point(gear2.getPoint().x + x, gear2.getPoint().y + y);
     
-    var pa2 = gear.getPoint();
+    var pa2 = gear2.getPoint();
     var v = pa1 - pa2;
     var v2 = pad - pa2;
     
-    gear.rot(v.angle - v2.angle);
+    gear2.rot(v.angle - v2.angle);
     
     clockwise = !clockwise;
     return {
         'point': p2,
-        'speed': speed * (g1.getTeethCount() / g2),
-        'gear': gear
+        'speed': speed * (gear1.getToothCount() / g2),
+        'gear': gear2
     };
 }
 
