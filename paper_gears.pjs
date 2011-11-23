@@ -35,7 +35,7 @@ function init() {
     
     var p = new Point(width / 6, (height / 3) + 30);
     var redGear = new Gear();
-    redGear.create(p, 15, '#ee2a33', speed, true);               // red gear
+    redGear.create(p, 15, '#ee2a33', speed, !clockwise);         // red gear
     gears.push(redGear);
     
     g = addGear(p, redGear, 6, '#00aeef', speed, 35);            // blue gear
@@ -81,9 +81,6 @@ function Gear() {
             var y = Math.round((d + (toothSize / 2)) * Math.sin(t));
             
             var placed = symbol.place(new Point(p.x + x, p.y + y));
-            
-            //var text = new PointText(new Point(p.x + x, p.y + y));
-            //text.content = '' + i;
             
             // 1 radian = 57.2957795 degrees
             placed.rotate(((180 / Math.PI) * angle) + 90);
