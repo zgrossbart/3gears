@@ -33,33 +33,22 @@ void setup() {
     int x = width / 6;
     int y = (height / 3) + 30;
     
-    Gear redGear = new Gear(x, y, speed, 0, #ee2a33, 15, true);                         // red gear
+    Gear redGear = new Gear(x, y, speed, 0, #ee2a33, 15, true);                                       // red gear
     gears.add(redGear);
     
-    HashMap map = addGear(x, y, redGear, 9, #00aeef, speed, 35);                             // blue gear
+    HashMap map = addGear(x, y, redGear, 9, #00aeef, speed, 35);                                      // blue gear
     map = addGear(map.get('x'), map.get('y'), map.get('gear'), 11, #52b755, map.get('speed'), 110);   // green gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 89, #d03c3a, map.get('speed'), 25);    // dark red gear
-    drawX();
-    return;
-    //map.get('gear').rot(2);
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 38, #d03c3a, map.get('speed'), 25);    // dark red gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 21, #F00FF0, map.get('speed'), 281);   // light purple gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 8, #f8b724, map.get('speed'), 188);    // yellow gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 6, #e0cb61, map.get('speed'), 221);    // beige gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 4, #f69c9f, map.get('speed'), 210);    // pink gear
     
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 25, #F00FF0, map.get('speed'), 330);   // light purple gear
-    //map.get('gear').rot(11);
-    
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 8, #f8b724, map.get('speed'), 305);   // yellow gear
-    //map.get('gear').rot(2);
-    
-    //map.get('gear').rot(7);
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 6, #e0cb61, map.get('speed'), 225);    // beige gear
-    
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 10, #f69c9f, map.get('speed'), 180);   // pink gear
-    //map.get('gear').rot(18);
-    
-    //frameRate(30);
-    drawX();
+    frameRate(30);
+    //drawX();
 }
 
-void drawX() {
+void draw() {
     if (stopped) {
         return;
     }
@@ -68,19 +57,6 @@ void drawX() {
     for (int i = 0; i < gears.size(); i++) {
         gears.get(i).drawGear();
     }
-}
-
-double findAngle(double x, double y, double x1, double y1) {
-    console.log('findAngle(' + x + ', ' + y + ', ' + x1 + ', ' + y1 + ')');
-    /*double x0 = x;
-    double y0 = y - Math.sqrt(Math.abs(x1 - x) * Math.abs(x1 - x)
-                           + Math.abs(y1 - y) * Math.abs(y1 - y));
-    return ((2 * Math.atan2(y1 - y0, x1 - x0)) * 180 / Math.PI);*/
-    
-     double x0 = x;
-     double y0 =  y - Math.sqrt(Math.abs(x1 - x) * Math.abs(x1 - x)
-                                + Math.abs(y1 - y) * Math.abs(y1 - y));
-     return (2 * Math.atan2(y1 - y0, x1 - x0)) * 180 / Math.PI;
 }
 
 HashMap addGear(int x, int y, Gear gear1, int g2, color c, int speed, int angle) {
@@ -97,16 +73,12 @@ HashMap addGear(int x, int y, Gear gear1, int g2, color c, int speed, int angle)
      * Now we need to rotate the gears so they match up
      */
     float wedge = 360 / gear1.getToothCount();
-    int tooth = Math.floor((angle - ((180 / Math.PI) * gear1.getRot())) / wedge);
-    /*double t = 2 * Math.PI * tooth / gear1.getToothCount();
-    int x = Math.round((r1 + (toothSize / 2)) * Math.cos(t));
-    int y = Math.round((r1 + (toothSize / 2)) * Math.sin(t));*/
-    
+    int tooth = Math.floor((angle - gear1.getRot()) / wedge);
     double t = 2 * Math.PI * tooth / gear1.getToothCount();
     int x = (int) Math.round((r1 + (toothSize / 1.85)) * Math.cos(t));
     int y = (int) Math.round((r1 + (toothSize / 1.85)) * Math.sin(t));
     
-    double rad = gear1.getRot();// * (Math.PI / 180);
+    double rad = gear1.getRot() * (Math.PI / 180);
     int x1 = (Math.cos(rad) * x) - (Math.sin(rad) * y);
     int y1 = (Math.cos(rad) * y) + (Math.sin(rad) * x);
     x = x1;
@@ -115,23 +87,11 @@ HashMap addGear(int x, int y, Gear gear1, int g2, color c, int speed, int angle)
     int pa1x = gear1.getX() + x;
     int pa1y = gear1.getY() + y;
     
-    gear1.setDebugX(pa1x);
-    gear1.setDebugY(pa1y);
-    
     t = 2 * Math.PI * 0.5 / gear2.getToothCount();
     x = Math.round((r2) * Math.cos(t));
     y = Math.round((r2) * Math.sin(t));
     int padx = gear2.getX() + x;
     int pady = gear2.getY() + y;
-    
-    /*double a1 = findAngle(gear2.getX(), gear2.getY(), pa1x, pa1y);
-    double a2 = findAngle(gear2.getX(), gear2.getY(), padx, pady);
-    
-    double rotAngle = a1 - a2;
-    
-    if (rotAngle > 0) {
-        rotAngle -= 360;
-    }*/
     
     PVector v1 = new PVector(pa1x - gear2.getX(),
                              pa1y - gear2.getY());
@@ -160,8 +120,6 @@ class Gear {
     int m_angle;
     int m_teeth;
     boolean m_clockwise;
-    int debugX;
-    int debugY;
     
     Gear(int x, int y, float speed, int angle, color c, int teeth, boolean clockwise) {
         m_x = x;
@@ -173,14 +131,6 @@ class Gear {
         m_clockwise = clockwise;
     }
     
-    void setDebugX(int x) {
-        debugX = x;
-    }
-
-    void setDebugY(int y) {
-        debugY = y;
-    }
-
     void drawGear() {
         spin();
         pushMatrix();
@@ -206,23 +156,14 @@ class Gear {
         drawTeeth((d / 2) - 5, m_teeth, m_c);
         
         popMatrix();
-        
-        fill(#e0cb61);
-        ellipse(getX(), getY(), 5, 5);
-        
-        fill(255, 0, 255);
-        ellipse(debugX, debugY, 10, 10);
-        
     }
     
     void rot(int angle) {
-        console.log('rot(' + angle + ');')
-        console.log('rot(' + (angle * 57.2957795) + ');');
-        m_angle -= angle;// * (Math.PI / 180);
+        m_angle -= angle;
     }
     
     int getRot() {
-        return m_angle;
+        return (180 / Math.PI) * m_angle;
     }
     
     void spin() {
@@ -249,7 +190,7 @@ class Gear {
             
             translate(x, y);
             
-            fill(m_c + (i * 20));
+            fill(m_c);
             rotate(angle - 55);
             
             beginShape();
@@ -262,8 +203,8 @@ class Gear {
             endShape();
             angle += increase;
             
-            fill(255, 255, 0);
-            ellipse(0, 0, 10, 10);
+            //fill(255, 255, 0);
+            //ellipse(0, 0, 10, 10);
             popMatrix();
         }
         popMatrix();
