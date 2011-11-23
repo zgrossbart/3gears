@@ -23,7 +23,7 @@ var clockwise = false;
 
 var width = 960;
 var height = 650;
-var started = true;
+var started = false;
 
 var gears = [];
 
@@ -38,13 +38,18 @@ function init() {
     redGear.create(p, 15, '#ee2a33', speed, !clockwise);         // red gear
     gears.push(redGear);
     
-    g = addGear(p, redGear, 6, '#00aeef', speed, 35);            // blue gear
-    g = addGear(g.point, g.gear, 11, '#52b755', g.speed, 110);   // green gear
-    g = addGear(g.point, g.gear, 6, '#d03c3a', g.speed, 25);     // dark red gear
-    g = addGear(g.point, g.gear, 25, '#F00FF0', g.speed, 330);   // light purple gear
-    g = addGear(g.point, g.gear, 8, '#fec01e', g.speed, 305);    // yellow gear
-    g = addGear(g.point, g.gear, 6, '#e0cb61', g.speed, 225);    // beige gear
-    g = addGear(g.point, g.gear, 10, '#f69c9f', g.speed, 185);   // pink gear
+    g = addGear(p, redGear, 4, '#00aeef', speed, 100);            // blue gear
+
+    g = addGear(g.point, g.gear, 41, '#52b755', g.speed, 52);   // green gear
+    g = addGear(g.point, g.gear, 6, '#d03c3a', g.speed, 324);     // dark red gear
+    g = addGear(g.point, g.gear, 9, '#F00FF0', g.speed, 30);   // light purple gear
+    g = addGear(g.point, g.gear, 4, '#fec01e', g.speed, 298);    // yellow gear
+    g = addGear(g.point, g.gear, 21, '#e0cb61', g.speed, 248);    // beige gear
+    g = addGear(g.point, g.gear, 11, '#f69c9f', g.speed, 210);   // pink gear
+    g = addGear(g.point, g.gear, 8, '#157d6b', g.speed, 124);   // dark green gear
+    //g = addGear(g.point, g.gear, 8, '#ee5b32', g.speed, 322);   // orange gear
+    
+    
 }
 
 function Gear() {
