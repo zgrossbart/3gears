@@ -50,17 +50,17 @@ function init() {
     
     g = addGear(g.point, g.gear, 25, '#F00FF0', g.speed, 330);   // light purple gear
     
-    g.gear.rot(15);
+    //g.gear.rot(15);
     
     g = addGear(g.point, g.gear, 8, '#fec01e', g.speed, 305);   // yellow gear
     
     
     g = addGear(g.point, g.gear, 6, '#e0cb61', g.speed, 225);    // beige gear
-    g.gear.rot(8);
+    //g.gear.rot(8);
     
     g = addGear(g.point, g.gear, 10, '#f69c9f', g.speed, 185);   // pink gear
     return;
-    g.gear.rot(17);
+    //g.gear.rot(17);
 }
 
 function Gear() {
@@ -201,8 +201,8 @@ function addGear(/*Point*/ p, /*Gear*/ g1, /*int*/ g2, /*color*/ color, /*int*/ 
     var tooth = Math.floor((angle - g1.getRot()) / w1);
     var t = 2 * Math.PI * tooth / g1.getTeethCount();
     console.log('t: ' + t);
-    var x = Math.round((r1 + (toothSize / 2)) * Math.cos(t));
-    var y = Math.round((r1 + (toothSize / 2)) * Math.sin(t));
+    var x = Math.round((r1 + (toothSize / 1.85)) * Math.cos(t));
+    var y = Math.round((r1 + (toothSize / 1.85)) * Math.sin(t));
     console.log('x,y: ' + x + ', ' + y);
     
     var r = g1.getRot() * (Math.PI / 180);
