@@ -23,7 +23,7 @@ var clockwise = false;
 
 var width = 960;
 var height = 650;
-var started = false;
+var started = true;
 
 var gears = [];
 
