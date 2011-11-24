@@ -47,17 +47,6 @@ g = {
             var tooth = g.createTooth(c);
             tooth.translate(p.x + x, p.y + y);
             tooth.rotate(((180 / Math.PI) * angle) + 90);
-            
-            /*var c = g.paper.ellipse(p.x + x, p.y + y, 5, 5);
-            c.attr({
-                'fill': 'red',
-                'stroke': 'red'
-            });*/
-            //var placed = symbol.place(new Point(p.x + x, p.y + y));
-            
-            // 1 radian = 57.2957795 degrees
-            //placed.rotate(((180 / Math.PI) * angle) + 90);
-            //teeth.addChild(placed);
             angle += increase;
         }
         
@@ -74,11 +63,8 @@ g = {
             'L ' + (toothSize / 2) + ' ' + (toothSize / 2) +                    // bottom right
             'L ' + (-(toothSize / 2)) + ' ' + (toothSize / 2) +                 // bottom left
             'L ' + (-(toothSize / 2) + 4) + ' ' + (-(toothSize / 2) + 8);       // upper left bump
-        
         path += ' z';
-        
-        console.log('path: ' + path);
-            
+
         return g.paper.path(path).attr({
             fill: c, 
             'stroke': c, 
