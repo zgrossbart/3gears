@@ -36,13 +36,15 @@ void setup() {
     Gear redGear = new Gear(x, y, speed, 0, #ee2a33, 15, true);                                       // red gear
     gears.add(redGear);
     
-    HashMap map = addGear(x, y, redGear, 9, #00aeef, speed, 35);                                      // blue gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 11, #52b755, map.get('speed'), 110);   // green gear
+    HashMap map = addGear(x, y, redGear, 9, #00aeef, speed, 30);                                      // blue gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 11, #52b755, map.get('speed'), 125);   // green gear
     map = addGear(map.get('x'), map.get('y'), map.get('gear'), 38, #d03c3a, map.get('speed'), 25);    // dark red gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 21, #F00FF0, map.get('speed'), 281);   // light purple gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 8, #f8b724, map.get('speed'), 188);    // yellow gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 6, #e0cb61, map.get('speed'), 221);    // beige gear
-    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 4, #f69c9f, map.get('speed'), 210);    // pink gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 4, #ac6a13, map.get('speed'), 318);    // light brown gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 7, #F00FF0, map.get('speed'), 281);    // light purple gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 8, #f8b724, map.get('speed'), 257);    // yellow gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 16, #e0cb61, map.get('speed'), 188);   // beige gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 4, #f69c9f, map.get('speed'), 201);    // pink gear
+    map = addGear(map.get('x'), map.get('y'), map.get('gear'), 7, #825f84, map.get('speed'), 175);    // pink gear
     
     frameRate(30);
     //drawX();
