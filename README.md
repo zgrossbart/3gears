@@ -5,3 +5,4 @@ The goal of this project is to make a gears animation with three different techn
 
 *   [Gears in PaperJS](http://zgrossbart.github.com/3gears/paper_gears.html)
 *   [Gears in Processing.js](http://zgrossbart.github.com/3gears/processing_gears.html)
+*   [Gears in Raphael.js](http://zgrossbart.github.com/3gears/raphael_gears.html)
