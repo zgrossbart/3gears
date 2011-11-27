@@ -6,7 +6,6 @@ var clockwise = false;
 g = {
     create: function(/*Point*/ p, /*int*/ teeth, /*string*/ c, /*int*/ speed, /*boolean*/ clockwise) {
         
-        var st = g.paper.set();
         g.speed = speed;
         g.clockwise = clockwise;
         
@@ -17,27 +16,25 @@ g = {
             'fill': c,
             'stroke': c
         });
-        st.push(outerCircle);
         
         var innerCircle = g.paper.ellipse(p.x, p.y, d / 8, d / 8);
         innerCircle.attr({
             'fill': 'white',
             'stroke': 'white'
         });
-        st.push(innerCircle);
         
-        //this.group.addChild(this.drawTeeth((d / 2) - 5, d / scale, c, p));
-        g.drawTeeth((d / 2) - 5, d / scale, c, p);
+        var st = g.drawTeeth((d / 2) - 5, d / scale, c, p);
+        
+        setInterval(function() {
+            st.rotate(6, 100, 100);
+        }, 66);
     },
     
     drawTeeth: function(/*int*/ d, /*int*/ plots, /*color*/ c, /*Point*/ p) {
         var increase = Math.PI * 2 / plots;
         var angle = 0;
         
-        //var teeth = new Group();
-        this.pos = p;
-        
-        //var symbol = new Symbol(this.createTooth(c));
+        var st = g.paper.set();
         
         for (var i = 0; i < plots; i++) {
             var t = 2 * Math.PI * i / plots;
@@ -47,12 +44,11 @@ g = {
             var tooth = g.createTooth(c);
             tooth.translate(p.x + x, p.y + y);
             tooth.rotate(((180 / Math.PI) * angle) + 90);
+            st.push(tooth);
             angle += increase;
         }
         
-        this.teethCount = plots;
-        
-        return;
+        return st;
     },
     
     createTooth: function(/*color*/ c) {
