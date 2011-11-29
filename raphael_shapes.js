@@ -1,5 +1,4 @@
 shapes = {
-    stopped: false,
     createCircle: function() {
         var paper = Raphael('raphaelCircle', 200, 200);
         var c = paper.ellipse(100, 100, 10, 10);
@@ -19,7 +18,7 @@ shapes = {
             'stroke': 'black'
         });
         back.click(function() {
-            shapes.stopped = !shapes.stopped;
+            main.raphaelAnimationStopped = !main.raphaelAnimationStopped;
         });
         
         
@@ -36,8 +35,8 @@ shapes = {
         });
         
         setInterval(function() {
-            if (!shapes.stopped) {
-                r.rotate(3);
+            if (!main.raphaelAnimationStopped) {
+                r.rotate(6);
             }
         }, 66);
     },

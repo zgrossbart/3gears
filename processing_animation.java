@@ -1,14 +1,16 @@
 float angle = 0.0;
-boolean stopped = false;
 
 void setup() {
     size(200, 200);
     smooth(); 
     frameRate(30);
+    main.processingAnimationStopped = false;
+    draw();
+    main.processingAnimationStopped = true;
 }
 
 void draw() {
-    if (stopped) {
+    if (main.processingAnimationStopped) {
         return;
     }
     
@@ -19,7 +21,7 @@ void draw() {
     ellipse(0, 0, 20, 20);
     
     rotate(angle);
-    angle += 0.02;
+    angle += 0.1;
     noFill();
     stroke();
     strokeWeight(2);
@@ -28,5 +30,5 @@ void draw() {
 }
 
 void mousePressed() {
-    stopped = !stopped;
+    main.processingAnimationStopped = !main.processingAnimationStopped;
 }
