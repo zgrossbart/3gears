@@ -43,30 +43,52 @@
         
         <div id="main">
             <div id="headers">
-                <p>
+                <p style="margin-top: 100px;">
+                    Compare the code for Paper, Processing, and Raphael.  We'll start by drawing a simple circle.
                 </p>
                 
+                <p style="margin-top: 200px;">
+                    Click the shapes to start the animation.
+                </p>
+                
+                <p style="margin-top: 200px;">
+                    Click the square to change the color.
+                </p>
             </div>
             <div id="paper">
-                <h2>Paper</h2>
+                <h2><a href="http://paperjs.org/">Paper</a></h2>
                 <canvas id="paperCircle" class="canvas" width="200" height="200" style="background-color: white;"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/paper_circle.pjs" class="sourceLink">view source</a>
+                
                 <canvas id="paperAnimation" class="canvas" width="200" height="200" style="background-color: white;"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/paper_animation.pjs" class="sourceLink">view source</a>
+                
                 <canvas id="paperInteraction" class="canvas" width="200" height="200" style="background-color: white;"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/paper_interaction.pjs" class="sourceLink">view source</a>
             </div>
             
             <div id="processing">
-                <h2>Processing</h2>
+                <h2><a href="http://processingjs.org/">Processing</a></h2>
                 <canvas width="200" height="200" class="canvas" data-processing-sources="processing_circle.java"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/processing_circle.java" class="sourceLink">view source</a>
+                
                 <canvas width="200" height="200" class="canvas" data-processing-sources="processing_animation.java"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/processing_animation.java" class="sourceLink">view source</a>
+                
                 <canvas width="200" height="200" class="canvas" data-processing-sources="processing_interaction.java"></canvas>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/processing_interaction.java" class="sourceLink">view source</a>
             </div>
             
             <div id="raphael">
-                <h2>Raphael</h2>
+                <h2><a href="http://raphaeljs.com/">Raphael</a></h2>
                 <div id="raphaelCircle" class="canvas"></div>
-                <div id="raphaelAnimation" class="canvas"></div>
-                <div id="raphaelInteraction" class="canvas"></div>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/raphael_shapes.js" class="sourceLink">view source</a>
                 
+                <div id="raphaelAnimation" class="canvas"></div>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/raphael_shapes.js" class="sourceLink">view source</a>
+                
+                <div id="raphaelInteraction" class="canvas"></div>
+                <a href="https://github.com/zgrossbart/3gears/blob/master/raphael_shapes.js" class="sourceLink">view source</a>
             </div>
         </div>
     </body>

@@ -10,6 +10,7 @@ function init() {
     r = new Path.Rectangle(rectangle);
     r.strokeColor = '#ee2a33';
     r.strokeWidth = 2;
+    r.rotate(20);
 }
 
 function onMouseUp(event) {

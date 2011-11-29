@@ -34,11 +34,13 @@ shapes = {
             'stroke': '#00aeef'
         });
         
+        r.rotate(60);
+        
         setInterval(function() {
             if (!main.raphaelAnimationStopped) {
                 r.rotate(6);
             }
-        }, 66);
+        }, 33);
     },
     
     createInteraction: function() {

@@ -1,9 +1,25 @@
 body {
     background: #fff;
     color: #000;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 24px;
     font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
+}
+
+a {
+    text-decoration: none;
+    
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.sourceLink {
+    position: relative;
+    top: -24px;
+    left: 30px;
+    font-size: 12px;
 }
 
 h2 {
@@ -17,7 +33,7 @@ h2 {
     height: 200px;
     margin: 0 auto;
     display: block;
-    margin-top: 36px;
+    margin-top: 18px;
 }
 
 #main {

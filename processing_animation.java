@@ -1,4 +1,5 @@
-float angle = 0.0;
+//40 degrees = 0.698131701 radians
+float angle = 0.698131701;
 
 void setup() {
     size(200, 200);
