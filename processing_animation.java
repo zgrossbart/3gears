@@ -14,16 +14,16 @@ void draw() {
         return;
     }
     
-    background(000);
+    background(#ffffff);
     translate(100, 100);
-    fill(#FFFFFF);
+    fill(#52b755);
     noStroke();
     ellipse(0, 0, 20, 20);
     
     rotate(angle);
     angle += 0.1;
     noFill();
-    stroke();
+    stroke(#52b755);
     strokeWeight(2);
     rect(-40, -40, 80, 80);
     

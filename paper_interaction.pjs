@@ -8,7 +8,7 @@ function init() {
     var size = new Size(80, 80);
     var rectangle = new Rectangle(point, size);
     r = new Path.Rectangle(rectangle);
-    r.fillColor = 'white';
+    r.fillColor = '#ee2a33';
 }
 
 function onMouseUp(event) {
@@ -16,9 +16,9 @@ function onMouseUp(event) {
 
     if (hitResult && hitResult.item) {
         if (hitResult.item.clicked) {
-            hitResult.item.fillColor = 'white';
+            hitResult.item.fillColor = '#ee2a33';
         } else {
-            hitResult.item.fillColor = 'red';
+            hitResult.item.fillColor = '#f00ff0';
         }
         
         hitResult.item.clicked = !hitResult.item.clicked;

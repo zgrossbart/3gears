@@ -3,8 +3,8 @@ shapes = {
         var paper = Raphael('raphaelCircle', 200, 200);
         var c = paper.ellipse(100, 100, 10, 10);
         c.attr({
-            'fill': 'white',
-            'stroke': 'white'
+            'fill': '#00aeef',
+            'stroke': '#00aeef'
         });
         
     },
@@ -14,8 +14,8 @@ shapes = {
         
         var back = paper.rect(10, 10, 180, 180);
         back.attr({
-            'fill': 'black',
-            'stroke': 'black'
+            'fill': 'white',
+            'stroke': 'white'
         });
         back.click(function() {
             main.raphaelAnimationStopped = !main.raphaelAnimationStopped;
@@ -24,14 +24,14 @@ shapes = {
         
         var c = paper.ellipse(100, 100, 10, 10);
         c.attr({
-            'fill': 'white',
-            'stroke': 'white'
+            'fill': '#00aeef',
+            'stroke': '#00aeef'
         });
         
         var r = paper.rect(60, 60, 80, 80);
         r.attr({
             'stroke-width': 2,
-            'stroke': 'white'
+            'stroke': '#00aeef'
         });
         
         setInterval(function() {
@@ -45,8 +45,8 @@ shapes = {
         var paper = Raphael('raphaelInteraction', 200, 200);
         var r = paper.rect(60, 60, 80, 80);
         r.attr({
-            'fill': 'white',
-            'stroke': 'white'
+            'fill': '#00aeef',
+            'stroke': '#00aeef'
         });
         
         var clicked = false;
@@ -54,13 +54,13 @@ shapes = {
         r.click(function() {
             if (clicked) {
                 r.attr({
-                    'fill': 'white',
-                    'stroke': 'white'
+                    'fill': '#00aeef',
+                    'stroke': '#00aeef'
                 });
             } else {
                 r.attr({
-                    'fill': 'red',
-                    'stroke': 'red'
+                    'fill': '#f00ff0',
+                    'stroke': '#f00ff0'
                 });
             }
             clicked = !clicked;

@@ -6,11 +6,18 @@ body {
     font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
 }
 
+h2 {
+    text-align: center;
+}
+
 .canvas {
     border-radius: 12px;
-    background: black;
+    border: thin solid lightgray;
     width: 200px;
     height: 200px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 36px;
 }
 
 #main {
@@ -19,23 +26,40 @@ body {
     margin: 0 auto;
 }
 
-#paper {
+#main > div {
+    padding: 10px;
+    overflow: hidden;
+}
+
+#headers {
     position: absolute;
     left: 0px;
-    width: 32%;
+    width: 240px;
+    top: 28px;
+}
+
+#paper {
+    position: absolute;
+    left: 240px;
+    width: 240px;
     top: 28px;
 }
 
 #processing {
     position: absolute;
-    left: 33%;
-    width: 32%;
+    left: 480px;
+    width: 240px;
     top: 28px;
 }
 
 #raphael {
     position: absolute;
-    left: 66%;
-    width: 32%;
+    left: 720px;
+    width: 240px;
     top: 28px;
+}
+
+pre {
+    font-size: 12px;
+    line-height: 14px;
 }

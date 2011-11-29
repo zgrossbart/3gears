@@ -8,11 +8,13 @@ void setup() {
     size(200, 200);
     bx = width/2.0;
     by = height/2.0;
+    noStroke();
+    fill(#52b755);
     frameRate(10);
 }
 
 void draw() { 
-    background(0);
+    background(#ffffff);
     
     // Test if the cursor is over the box 
     if (mouseX > bx-bs && mouseX < bx+bs && 
@@ -29,9 +31,9 @@ void draw() {
 void mousePressed() {
     if (bover) { 
         if (clicked) {
-          fill(255, 255, 255);
+          fill(#52b755);
         } else {
-          fill(255, 0, 0);
+            fill(#f00ff0);
         }
         clicked = !clicked;
     }
