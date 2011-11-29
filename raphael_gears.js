@@ -111,6 +111,6 @@ window.onload = function () {
     g.create({
         'x': 250,
         'y': 250
-    }, 15, '#ee2a33', !clockwise);
+    }, 15, '#00aeef', !clockwise);
     
 };
