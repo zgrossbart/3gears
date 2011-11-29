@@ -23,7 +23,7 @@ void draw() {
     noFill();
     stroke();
     strokeWeight(2);
-    quad(-40, -40, 40, -40, 40, 40, -40, 40);
+    rect(-40, -40, 80, 80);
     
 }
 

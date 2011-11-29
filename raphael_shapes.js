@@ -40,14 +40,39 @@ shapes = {
                 r.rotate(3);
             }
         }, 66);
+    },
+    
+    createInteraction: function() {
+        var paper = Raphael('raphaelInteraction', 200, 200);
+        var r = paper.rect(60, 60, 80, 80);
+        r.attr({
+            'fill': 'white',
+            'stroke': 'white'
+        });
         
+        var clicked = false;
         
+        r.click(function() {
+            if (clicked) {
+                r.attr({
+                    'fill': 'white',
+                    'stroke': 'white'
+                });
+            } else {
+                r.attr({
+                    'fill': 'red',
+                    'stroke': 'red'
+                });
+            }
+            clicked = !clicked;
+        });
         
-    }
+    },
 };
 
 window.onload = function () {
     shapes.createCircle();
     shapes.createAnimation();
+    shapes.createInteraction();
 };
     

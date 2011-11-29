@@ -16,6 +16,7 @@ body {
 #main {
     position: relative;
     width: 960px;
+    margin: 0 auto;
 }
 
 #paper {

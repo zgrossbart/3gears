@@ -1,0 +1,28 @@
+var hitOptions = {
+    fill: true,
+    tolerance: 5
+};
+
+function init() {
+    var point = new Point(60, 60);
+    var size = new Size(80, 80);
+    var rectangle = new Rectangle(point, size);
+    r = new Path.Rectangle(rectangle);
+    r.fillColor = 'white';
+}
+
+function onMouseUp(event) {
+    var hitResult = project.hitTest(event.point, hitOptions);
+
+    if (hitResult && hitResult.item) {
+        if (hitResult.item.clicked) {
+            hitResult.item.fillColor = 'white';
+        } else {
+            hitResult.item.fillColor = 'red';
+        }
+        
+        hitResult.item.clicked = !hitResult.item.clicked;
+    }
+}
+
+init();
