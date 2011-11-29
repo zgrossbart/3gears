@@ -22,6 +22,7 @@ var toothSize = 28;
 var clockwise = false;
 
 g = {
+    stopped: false,
     create: function(/*Point*/ p, /*int*/ teeth, /*string*/ c, /*int*/ speed, /*boolean*/ clockwise) {
         
         g.speed = speed;
@@ -34,17 +35,25 @@ g = {
             'fill': c,
             'stroke': c
         });
+        outerCircle.click(function() {
+            g.stopped = !g.stopped;
+        });
         
         var innerCircle = g.paper.ellipse(p.x, p.y, d / 8, d / 8);
         innerCircle.attr({
             'fill': 'white',
             'stroke': 'white'
         });
+        innerCircle.click(function() {
+            g.stopped = !g.stopped;
+        });
         
         var st = g.drawTeeth((d / 2) - 5, d / scale, c, p);
         
         setInterval(function() {
-            st.rotate(6, 100, 100);
+            if (!g.stopped) {
+                st.rotate(6, 100, 100);
+            }
         }, 66);
     },
     
@@ -88,6 +97,16 @@ g = {
 
 window.onload = function () {
     g.paper = Raphael('canvas', 960, 650);
+    
+    var back = g.paper.rect(0, 0, 960, 650);
+    back.attr({
+        'fill': '#ececec',
+        'stroke': '#ececec'
+    });
+
+    back.click(function() {
+        g.stopped = !g.stopped;
+    });
     
     g.create({
         'x': 250,
