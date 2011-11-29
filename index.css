@@ -1,0 +1,40 @@
+body {
+    background: #fff;
+    color: #000;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "ff-basic-gothic-web-pro", Verdana,Arial,Sans-serif;
+}
+
+.canvas {
+    border-radius: 12px;
+    background: black;
+    width: 200px;
+    height: 200px;
+}
+
+#main {
+    position: relative;
+    width: 960px;
+}
+
+#paper {
+    position: absolute;
+    left: 0px;
+    width: 32%;
+    top: 28px;
+}
+
+#processing {
+    position: absolute;
+    left: 33%;
+    width: 32%;
+    top: 28px;
+}
+
+#raphael {
+    position: absolute;
+    left: 66%;
+    width: 32%;
+    top: 28px;
+}
