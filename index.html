@@ -10,6 +10,7 @@
         <script src="raphael_shapes.js" type="text/javascript"></script>
         
         <script type="text/paperscript" canvas="paperCircle" src="paper_circle.pjs" id="script"></script>
+        <script type="text/paperscript" canvas="paperAnimation" src="paper_animation.pjs" id="script"></script>
         
         <link rel="stylesheet" href="index.css" type="text/css" media="screen">
         
@@ -35,17 +36,24 @@
             <div id="paper">
                 <h2>Paper</h2>
                 <canvas id="paperCircle" class="canvas" width="200" height="200" style="background-color: black;"></canvas>
-                
+                <br>
+                <br>
+                <canvas id="paperAnimation" class="canvas" width="200" height="200" style="background-color: black;"></canvas>
             </div>
             
             <div id="processing">
                 <h2>Processing</h2>
-                <canvas width="200" height="200" class="canvas" data-processing-sources="processing_circle.java"></canvas></p>
+                <canvas width="200" height="200" class="canvas" data-processing-sources="processing_circle.java"></canvas>
+                <br>
+                <br>
+                <canvas width="200" height="200" class="canvas" data-processing-sources="processing_animation.java"></canvas>
             </div>
             
             <div id="raphael">
                 <h2>Raphael</h2>
                 <div id="raphaelCircle" class="canvas"></div>
+                <br>
+                <div id="raphaelAnimation" class="canvas"></div>
                 
             </div>
         </div>

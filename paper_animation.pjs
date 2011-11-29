@@ -1,0 +1,27 @@
+var stopped = false;
+var r;
+
+function init() {
+    var c = new Path.Circle(new Point(100, 100), 10);
+    c.fillColor = 'white';
+    
+    var point = new Point(60, 60);
+    var size = new Size(80, 80);
+    var rectangle = new Rectangle(point, size);
+    r = new Path.Rectangle(rectangle);
+    r.strokeColor = 'white';
+    r.strokeWidth = 2;
+}
+
+function onMouseUp(event) {
+    stopped = !stopped;
+}
+
+function onFrame(event) {
+    if (!stopped) {
+        r.rotate(0.5);
+    }
+}
+
+
+init();
