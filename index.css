@@ -80,4 +80,14 @@ pre {
     line-height: 14px;
 }
 
+#paperGears {
+    background: transparent url('gears.png') no-repeat scroll 0 0;
+}
 
+#processingGears {
+    background: transparent url('gears.png') no-repeat scroll -250px 0;
+}
+
+#raphaelGears {
+    background: transparent url('gears.png') no-repeat scroll -500px 0;
+}
