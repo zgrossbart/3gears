@@ -1,27 +1,27 @@
 /*!
- * Paper.js v0.21
+ * Paper.js v0.22
  *
  * This file is part of Paper.js, a JavaScript Vector Graphics Library,
  * based on Scriptographer.org and designed to be largely API compatible.
- * http:
- * http:
+ * http://paperjs.org/
+ * http://scriptographer.org/
  *
  * Copyright (c) 2011, Juerg Lehni & Jonathan Puckey
- * http:
+ * http://lehni.org/ & http://jonathanpuckey.com/
  *
  * Distributed under the MIT license. See LICENSE file for details.
  *
  * All rights reserved.
  *
- * Date: Fri Sep 23 11:19:03 2011 +0200
+ * Date: Thu Nov 10 19:19:25 2011 +0100
  *
  ***
  *
  * Bootstrap.js JavaScript Framework.
- * http:
+ * http://bootstrapjs.org/
  *
  * Copyright (c) 2006 - 2011 Juerg Lehni
- * http:
+ * http://lehni.org/
  *
  * Distributed under the MIT license.
  *
@@ -31,14 +31,14 @@
  *
  * A JavaScript tokenizer / parser / generator, originally written in Lisp.
  * Copyright (c) Marijn Haverbeke <marijnh@gmail.com>
- * http:
+ * http://marijn.haverbeke.nl/parse-js/
  *
  * Ported by to JavaScript by Mihai Bazon
  * Copyright (c) 2010, Mihai Bazon <mihai.bazon@gmail.com>
- * http:
+ * http://mihai.bazon.net/blog/
  *
  * Modifications and adaptions to browser (c) 2011, Juerg Lehni
- * http:
+ * http://lehni.org/
  *
  * Distributed under the BSD license.
  */
@@ -409,7 +409,7 @@ var PaperScope = this.PaperScope = Base.extend({
 		PaperScope._scopes[this._id] = this;
 	},
 
-	version: 0.21,
+	version: 0.22,
 
 	evaluate: function(code) {
 		var res = PaperScript.evaluate(code, this);
@@ -2894,7 +2894,7 @@ var Raster = this.Raster = PlacedItem.extend({
 			channels = new Array(4);
 		for (var i = 0; i < 4; i++)
 			channels[i] = pixels[i] / 255;
-		return RGBColor.read(channels);
+		return RgbColor.read(channels);
 	},
 
 	setPixel: function(point, color) {
@@ -5818,7 +5818,7 @@ var Color = this.Color = Base.extend(new function() {
 	var colorCache = {},
 		colorContext;
 
-	function nameToRGBColor(name) {
+	function nameToRgbColor(name) {
 		var color = colorCache[name];
 		if (color)
 			return color.clone();
@@ -5832,10 +5832,10 @@ var Color = this.Color = Base.extend(new function() {
 		colorContext.fillRect(0, 0, 1, 1);
 		var data = colorContext.getImageData(0, 0, 1, 1).data,
 			rgb = [data[0] / 255, data[1] / 255, data[2] / 255];
-		return (colorCache[name] = RGBColor.read(rgb)).clone();
+		return (colorCache[name] = RgbColor.read(rgb)).clone();
 	}
 
-	function hexToRGBColor(string) {
+	function hexToRgbColor(string) {
 		var hex = string.match(/^#?(\w{1,2})(\w{1,2})(\w{1,2})$/);
 		if (hex.length >= 4) {
 			var rgb = new Array(3);
@@ -5844,7 +5844,7 @@ var Color = this.Color = Base.extend(new function() {
 				rgb[i] = parseInt(channel.length == 1
 						? channel + channel : channel, 16) / 255;
 			}
-			return RGBColor.read(rgb);
+			return RgbColor.read(rgb);
 		}
 	}
 
@@ -5871,7 +5871,7 @@ var Color = this.Color = Base.extend(new function() {
 						:            (r - g) / delta + 4) * 60, 
 				s = max == 0 ? 0 : delta / max,
 				v = max; 
-			return new HSBColor(h, s, v, color._alpha);
+			return new HsbColor(h, s, v, color._alpha);
 		},
 
 		'hsb-rgb': function(color) {
@@ -5887,7 +5887,7 @@ var Color = this.Color = Base.extend(new function() {
 					b * (1 - s * f),		
 					b * (1 - s * (1 - f))	
 				];
-			return new RGBColor(v[i[0]], v[i[1]], v[i[2]], color._alpha);
+			return new RgbColor(v[i[0]], v[i[1]], v[i[2]], color._alpha);
 		},
 
 		'rgb-hsl': function(color) {
@@ -5906,7 +5906,7 @@ var Color = this.Color = Base.extend(new function() {
 				s = achromatic ? 0 : l < 0.5
 						? delta / (max + min)
 						: delta / (2 - max - min);
-			return new HSLColor(h, s, l, color._alpha);
+			return new HslColor(h, s, l, color._alpha);
 		},
 
 		'hsl-rgb': function(color) {
@@ -5915,7 +5915,7 @@ var Color = this.Color = Base.extend(new function() {
 				l = color._lightness,
 				t1, t2, c;
 			if (s == 0)
-				return new RGBColor(l, l, l, color._alpha);
+				return new RgbColor(l, l, l, color._alpha);
 			var t3s = [ h + 1 / 3, h, h - 1 / 3 ],
 				t2 = l < 0.5 ? l * (1 + s) : l + s - l * s,
 				t1 = 2 * l - t2,
@@ -5932,7 +5932,7 @@ var Color = this.Color = Base.extend(new function() {
 							? t1 + (t2 - t1) * ((2 / 3) - t3) * 6
 							: t1;
 			}
-			return new RGBColor(c[0], c[1], c[2], color._alpha);
+			return new RgbColor(c[0], c[1], c[2], color._alpha);
 		},
 
 		'rgb-gray': function(color) {
@@ -5942,15 +5942,15 @@ var Color = this.Color = Base.extend(new function() {
 
 		'gray-rgb': function(color) {
 			var comp = 1 - color._gray;
-			return new RGBColor(comp, comp, comp, color._alpha);
+			return new RgbColor(comp, comp, comp, color._alpha);
 		},
 
 		'gray-hsb': function(color) {
-			return new HSBColor(0, 0, 1 - color._gray, color._alpha);
+			return new HsbColor(0, 0, 1 - color._gray, color._alpha);
 		},
 
 		'gray-hsl': function(color) {
-			return new HSLColor(0, 0, 1 - color._gray, color._alpha);
+			return new HslColor(0, 0, 1 - color._gray, color._alpha);
 		}
 	};
 
@@ -5963,23 +5963,23 @@ var Color = this.Color = Base.extend(new function() {
 			if (typeof arg === 'object' && !isArray) {
 				if (!type) {
 					return arg.red !== undefined
-						? new RGBColor(arg.red, arg.green, arg.blue, arg.alpha)
+						? new RgbColor(arg.red, arg.green, arg.blue, arg.alpha)
 						: arg.gray !== undefined
 						? new GrayColor(arg.gray, arg.alpha)
 						: arg.lightness !== undefined
-						? new HSLColor(arg.hue, arg.saturation, arg.lightness,
+						? new HslColor(arg.hue, arg.saturation, arg.lightness,
 								arg.alpha)
 						: arg.hue !== undefined
-						? new HSBColor(arg.hue, arg.saturation, arg.brightness,
+						? new HsbColor(arg.hue, arg.saturation, arg.brightness,
 								arg.alpha)
-						: new RGBColor(); 
+						: new RgbColor(); 
 				} else {
 					return Color.read(arguments).convert(type);
 				}
 			} else if (typeof arg === 'string') {
 				var rgbColor = arg.match(/^#[0-9a-f]{3,6}$/i)
-						? hexToRGBColor(arg)
-						: nameToRGBColor(arg);
+						? hexToRgbColor(arg)
+						: nameToRgbColor(arg);
 				return type
 						? rgbColor.convert(type)
 						: rgbColor;
@@ -5988,7 +5988,7 @@ var Color = this.Color = Base.extend(new function() {
 						: Array.prototype.slice.call(arguments);
 				if (!type) {
 					if (components.length >= 3)
-						return new RGBColor(components);
+						return new RgbColor(components);
 					return new GrayColor(components);
 				} else {
 					Base.each(this._components,
@@ -6169,17 +6169,17 @@ var GrayColor = this.GrayColor = Color.extend({
 	_colorType: 'gray'
 });
 
-var RGBColor = this.RGBColor = Color.extend({
+var RgbColor = this.RgbColor = this.RGBColor = Color.extend({
 
 	_colorType: 'rgb'
 });
 
-var HSBColor = this.HSBColor = Color.extend({
+var HsbColor = this.HsbColor = this.HSBColor = Color.extend({
 
 	_colorType: 'hsb'
 });
 
-var HSLColor = this.HSLColor = Color.extend({
+var HslColor = this.HslColor = this.HSLColor = Color.extend({
 
 	_colorType: 'hsl'
 });
