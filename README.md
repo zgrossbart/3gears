@@ -1,8 +1,7 @@
 ﻿3 Gears
 ==================================================
 
-The goal of this project is to make a gears animation with three different technologies.  So far I have animations in [PaperJS](http://paperjs.org/) and [Processing.js](http://processingjs.org/).  I'm still working on [Raphaël](http://raphaeljs.com) and I'm still trying to work out a couple of bugs in my trigonometry.  
+The project is the sample code to an article comparing [PaperJS](http://paperjs.org/), [Processing.js](http://processingjs.org/), and [Raphaël](http://raphaeljs.com).  It shows a simple drawing, animation, and interaction example in each and then combines it all in a complex animation of gears.  
 
-*   [Gears in PaperJS](http://zgrossbart.github.com/3gears/paper_gears.html)
-*   [Gears in Processing.js](http://zgrossbart.github.com/3gears/processing_gears.html)
-*   [Gears in Raphael.js](http://zgrossbart.github.com/3gears/raphael_gears.html)
+
+[Paper vs. Processing vs. Rapha&euml;l](http://zgrossbart.github.com/3gears)
