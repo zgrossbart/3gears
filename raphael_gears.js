@@ -50,7 +50,17 @@ g = {
         });
         
         var st = g.drawTeeth((d / 2) - 5, d / scale, c, p),
-            an = Raphael.animation({transform: "...R360," + [p.x, p.y]}, 6000);
+            an = Raphael.animation({transform: "r360," + [p.x, p.y]}, 5000);
+        
+        var path = "";
+        for (var i = 0, ii = st.length; i < ii; i++) {
+            path += Raphael.mapPath(st[i].attr("path"), st[i].matrix);
+        }
+        st.remove();
+        st = g.paper.path(path).attr({
+            stroke: "none",
+            fill: c
+        });
         
         st.animate(an.repeat(Infinity));
     },
