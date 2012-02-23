@@ -16,7 +16,6 @@
  *
  ******************************************************************************/
  
-var speed = 0.75;
 var scale = 15;
 var toothSize = 28;
 var clockwise = false;
@@ -50,7 +49,7 @@ g = {
         });
         
         var st = g.drawTeeth((d / 2) - 5, d / scale, c, p),
-            an = Raphael.animation({transform: "r360," + [p.x, p.y]}, 5000);
+            an = Raphael.animation({transform: (clockwise ? "r360," : "r-360,") + [p.x, p.y]}, speed);
         
         var path = "";
         for (var i = 0, ii = st.length; i < ii; i++) {
@@ -111,9 +110,31 @@ window.onload = function () {
         g.stopped = !g.stopped;
     });
     
+    var speed = 15000;
+
     g.create({
-        'x': 250,
-        'y': 250
-    }, 15, '#00aeef', !clockwise);
+        'x': 150,
+        'y': 150
+    }, 15, '#00aeef', speed, !clockwise);
+    
+    g.create({
+        'x': 295,
+        'y': 285
+    }, 8, '#ee5b32', speed * (8 / 15), clockwise);
+    
+    g.create({
+        'x': 172,
+        'y': 587
+    }, 32, '#F00FF0', speed * (17 / 8), !clockwise);
+    
+    g.create({
+        'x': 565,
+        'y': 425
+    }, 21, '#fec01e', speed * (23.5 / 17), clockwise);
+    
+    g.create({
+        'x': 615,
+        'y': 165
+    }, 11, '#157d6b', speed * (8 / 11), !clockwise);
     
 };
