@@ -1,33 +1,31 @@
-jQuery(document).ready(function() {
-    var paper = Raphael('raphaelAnimation', 200, 200);
-        
-    var back = paper.rect(10, 10, 180, 180);
-    back.attr({
-        'fill': 'white',
-        'stroke': 'white'
-    });
-    back.click(function() {
-        main.raphaelAnimationStopped = !main.raphaelAnimationStopped;
-    });
+Raphael('raphaelAnimation', 200, 200, function () {
+    var paper = this,
+        anim;
     
-    
-    var c = paper.ellipse(100, 100, 10, 10);
+    var c = paper.circle(100, 100, 10);
     c.attr({
-        'fill': '#00aeef',
-        'stroke': '#00aeef'
+        fill: '#00aeef',
+        stroke: 'none'
     });
     
     var r = paper.rect(60, 60, 80, 80);
     r.attr({
         'stroke-width': 2,
-        'stroke': '#00aeef'
+        stroke: '#00aeef',
+        fill: "#000",
+        "fill-opacity": 0
+    });
+    r.click(function () {
+        if (anim) {
+            r.stop();
+        } else {
+            r.animate(a);
+        }
+        anim = !anim;
     });
     
     r.rotate(60);
     
-    setInterval(function() {
-        if (!main.raphaelAnimationStopped) {
-            r.rotate(6);
-        }
-    }, 33);
+    var a = Raphael.animation({transform: "...r360"}, 3000).repeat(Infinity);
+    
 });

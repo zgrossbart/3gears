@@ -21,6 +21,7 @@ var scale = 15;
 var toothSize = 28;
 var clockwise = false;
 
+
 g = {
     stopped: false,
     create: function(/*Point*/ p, /*int*/ teeth, /*string*/ c, /*int*/ speed, /*boolean*/ clockwise) {
@@ -30,47 +31,39 @@ g = {
         
         var d = teeth * scale;
         
-        var outerCircle = g.paper.ellipse(p.x, p.y, d / 2, d / 2);
+        var outerCircle = g.paper.circle(p.x, p.y, d / 2);
         outerCircle.attr({
-            'fill': c,
-            'stroke': c
+            fill: c,
+            stroke: c
         });
         outerCircle.click(function() {
             g.stopped = !g.stopped;
         });
         
-        var innerCircle = g.paper.ellipse(p.x, p.y, d / 8, d / 8);
+        var innerCircle = g.paper.circle(p.x, p.y, d / 8);
         innerCircle.attr({
-            'fill': 'white',
-            'stroke': 'white'
+            fill: 'white',
+            stroke: 'white'
         });
         innerCircle.click(function() {
             g.stopped = !g.stopped;
         });
         
-        var st = g.drawTeeth((d / 2) - 5, d / scale, c, p);
+        var st = g.drawTeeth((d / 2) - 5, d / scale, c, p),
+            an = Raphael.animation({transform: "...R360," + [p.x, p.y]}, 6000);
         
-        setInterval(function() {
-            if (!g.stopped) {
-                st.rotate(6, 100, 100);
-            }
-        }, 66);
+        st.animate(an.repeat(Infinity));
     },
     
     drawTeeth: function(/*int*/ d, /*int*/ plots, /*color*/ c, /*Point*/ p) {
-        var increase = Math.PI * 2 / plots;
+        var increase = 360 / plots;
         var angle = 0;
         
         var st = g.paper.set();
         
         for (var i = 0; i < plots; i++) {
-            var t = 2 * Math.PI * i / plots;
-            var x = Math.round((d + (toothSize / 2)) * Math.cos(t));
-            var y = Math.round((d + (toothSize / 2)) * Math.sin(t));
-            
             var tooth = g.createTooth(c);
-            tooth.translate(p.x + x, p.y + y);
-            tooth.rotate(((180 / Math.PI) * angle) + 90);
+            tooth.transform("t" + [p.x, p.y - (d + (toothSize / 2))] + "R" + [angle, p.x, p.y]);
             st.push(tooth);
             angle += increase;
         }
@@ -79,19 +72,19 @@ g = {
     },
     
     createTooth: function(/*color*/ c) {
-         
-        var path = 'M ' + (-(toothSize / 4) + 2) + ' ' + (-(toothSize / 2)) +   // upper left
-            'L ' + ((toothSize / 4) - 6) + ' ' + (-(toothSize / 2)) +           // upper right
-            'L ' + (toothSize / 4) + ' ' + (-(toothSize / 2) + 8) +             // upper right bump
-            'L ' + (toothSize / 2) + ' ' + (toothSize / 2) +                    // bottom right
-            'L ' + (-(toothSize / 2)) + ' ' + (toothSize / 2) +                 // bottom left
-            'L ' + (-(toothSize / 2) + 4) + ' ' + (-(toothSize / 2) + 8);       // upper left bump
+        var t2 = toothSize / 2;
+        var path = 'M ' + (-t2 / 2 + 2) + ' ' + (-t2) +   // upper left
+            'L ' + (t2 / 2 - 6) + ' ' + (-t2) +           // upper right
+            'L ' + (t2 / 2) + ' ' + (-t2 + 8) +             // upper right bump
+            'L ' + t2 + ' ' + t2 +                    // bottom right
+            'L ' + (-t2) + ' ' + t2 +                 // bottom left
+            'L ' + (-t2 + 4) + ' ' + (-t2 + 8);       // upper left bump
         path += ' z';
 
         return g.paper.path(path).attr({
             fill: c, 
-            'stroke': c, 
-            'stroke-width': 1});
+            stroke: "none"
+        });
     }
 };
 
@@ -100,8 +93,8 @@ window.onload = function () {
     
     var back = g.paper.rect(0, 0, 960, 650);
     back.attr({
-        'fill': '#ececec',
-        'stroke': '#ececec'
+        fill: '#ececec',
+        stroke: 'none'
     });
 
     back.click(function() {
