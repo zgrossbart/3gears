@@ -1,7 +1,6 @@
 float bx;
 float by;
 int bs = 20;
-boolean bover = false;
 boolean clicked = false;
 
 void setup() {
@@ -16,20 +15,15 @@ void setup() {
 void draw() { 
     background(#ffffff);
     
-    // Test if the cursor is over the box 
-    if (mouseX > bx-bs && mouseX < bx+bs && 
-        mouseY > by-bs && mouseY < by+bs) {
-        bover = true;  
-    } else {
-        bover = false;
-    }
-    
     translate(100, 100);
     rect(-40, -40, 80, 80);
 }
 
 void mousePressed() {
-    if (bover) { 
+    
+    // Test if the cursor is over the box 
+    if (mouseX > bx-bs && mouseX < bx+bs && 
+        mouseY > by-bs && mouseY < by+bs) { 
         if (clicked) {
           fill(#52b755);
         } else {
